@@ -24,7 +24,9 @@
             display: flex;
             list-style: none;
             margin: 0;
-            padding: 0; }
+            padding: 0;
+            align-items: center;
+        }
         .topheader .topnav .menu li {
             padding: 0 15px; }
             .topheader .topnav .menu li a {
@@ -33,9 +35,16 @@
                 font-weight: 600;
                 line-height: 50px;
                 position: relative; }
-            .topheader .topnav .menu li a .fa-moon {
-                font-size: 1rem;
-                transform: rotate(-0.03turn); }
+
+                .topheader .topnav .menu li a{
+                    display: flex;
+                    flex-direction: row;
+                    margin: auto;
+                }
+            .topheader .topnav .menu li a .fa-cart {
+                display: inline;
+
+            }
             .topheader .topnav .menu li .after::after {
                 content: "";
                 background-color: black;
@@ -55,3 +64,10 @@
         .topheader .topnav .open-menu,
         .topheader .topnav .close-menu {
             display: none; }
+
+.menu-item{
+    display: flex;
+}
+.cart{
+    padding-right: 0.5rem;
+}
