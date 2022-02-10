@@ -1,5 +1,5 @@
 import './App.css';
-import NavBar from './components/nav/nav';
+import NavBar from './components/Nav/nav';
 import ItemListContainer from './components/ItemListContainer/ItemListContainer'
 
 
