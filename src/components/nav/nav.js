@@ -1,4 +1,4 @@
-import './nav.css'
+import './Nav.css'
 import CartWidget from '../CartWidget/CartWidget.js'
 
 
