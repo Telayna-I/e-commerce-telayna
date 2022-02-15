@@ -1,0 +1,21 @@
+.card{
+    margin-top: 3rem ;
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    border: solid 3px black;
+    border-radius: 7px;
+    margin-left: 2rem;
+}
+
+.card-title{
+    text-align: center;
+    padding: 1.5rem;
+    font-weight: 600;
+}
+
+.price{
+    text-align: center;
+    padding-top: 2.5rem;
+    font-weight: 600;
+}

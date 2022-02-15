@@ -1,5 +1,23 @@
+.item-list-container{
+    display: flex;
+    flex-direction: column;
+}
+
 .saludo{
     font-size: 3rem;
     color: blue;
     text-align: center;
+    font-weight: 500;
+}
+
+.products{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.espera{
+    text-align: center;
+    margin-top: 3rem;
 }

@@ -1,22 +1,45 @@
 import ItemCount from '../ItemCount/ItemCount';
 import './ItemListContainer.css'
+import { getProducts } from '../../Mock/Products';
+import { useState, useEffect } from 'react';
+import ItemList from '../ItemList/ItemList';
 
 const ItemListContainer = (props) =>{
 
     const { greeting, className } = props;
+    const [products, setProduct] = useState([]);
+    const [estado, setEstado] = useState(false);
+    
+    useEffect(()=>{
+        getProducts
+        .then((res) =>{
+            setProduct(res);
+            setEstado(true);
+        })
+        .catch(()=>{
+            console.log('error');;
+        })
+        .finally(() =>{
+            // se ejecuta siempre y al final.
+        })
+    }, []);
 
-
-    const Agregar = (numero) =>{
-        console.log(`Agregue ${numero} camisas`)
+    if (estado == true){
+        return(
+            <div className = 'item-list-container'>
+                <h2 className = {className}>{greeting}</h2>
+                <ItemList products = {products}/>
+            </div>
+    
+        );
+    }else{
+        return(
+            <div className='item-list-container'>
+                <h2 className = {className}>{greeting}</h2>
+                <h4 className='espera'>Su solicitud esta siendo procesada</h4>
+            </div>
+        )
     }
-
-
-    return(
-        <div className = 'item-list-container'>
-            <h2 className = {className}>{greeting}</h2>
-            <ItemCount total = {10} inicial = {1} onAdd = {Agregar} />
-        </div>
-    )
-} 
+};
 
 export default ItemListContainer

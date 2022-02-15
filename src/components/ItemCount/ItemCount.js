@@ -22,7 +22,6 @@ const ItemCount = (props) => {
 
     return(
         <div className = "item-count">
-            <h2 className = 'prenda'>Camisa</h2>
             <div className = "counter">
                 <button className = "btn btn-decrement" onClick ={Reducir}>-</button>
                 <h2 className = 'numero' > { numero } </h2>
