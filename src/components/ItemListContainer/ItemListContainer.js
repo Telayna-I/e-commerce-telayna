@@ -1,4 +1,3 @@
-import ItemCount from '../ItemCount/ItemCount';
 import './ItemListContainer.css'
 import { getProducts } from '../../Mock/Products';
 import { useState, useEffect } from 'react';
