@@ -1,0 +1,9 @@
+.item-detail-container{
+    display: flex;
+    width: 80%;
+    background-color: #c4c4c4c4;
+    border-radius: 0.5rem ;
+    margin: auto;
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+}
