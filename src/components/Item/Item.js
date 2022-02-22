@@ -1,5 +1,7 @@
 import ItemCount from "../ItemCount/ItemCount";
 import './Item.css'
+import { Link } from 'react-router-dom'
+
 
 const Item = ( {product } )=>{
 
@@ -13,6 +15,7 @@ const Item = ( {product } )=>{
             <img src = {product.img} className = "card-img"></img>
             <h4 className = "price" ><span>$ {product.price}</span></h4>
             <ItemCount total = {product.stock} inicial = {1} onAdd = {Agregar} />
+            <Link className="detalle" to={`/detail/${product.id}`} >Ver detalles</Link>
         </div>
     );
 };

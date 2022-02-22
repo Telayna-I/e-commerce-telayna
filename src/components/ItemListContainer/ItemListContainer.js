@@ -1,41 +1,47 @@
 import './ItemListContainer.css'
-import { getProducts } from '../../Mock/Products';
+import { getCategory } from '../../Mock/Products';
 import { useState, useEffect } from 'react';
 import ItemList from '../ItemList/ItemList';
+import { useParams } from 'react-router-dom';
+import Spinner from '../Spinner/Spinner';
+
 
 const ItemListContainer = (props) =>{
-
-    const { greeting, className } = props;
+    
+    const { className } = props;
     const [products, setProduct] = useState([]);
-    const [estado, setEstado] = useState(false);
+    const [loading, setLoading] = useState();
+    const { categoryId } = useParams()
+
     
     useEffect(()=>{
-        getProducts
-        .then((res) =>{
+        getCategory(categoryId)
+        .then(res =>{
             setProduct(res);
-            setEstado(true);
+            setLoading(false);
         })
-        .catch(()=>{
+        .catch(err =>{
             console.log('error');;
         })
         .finally(() =>{
-            // se ejecuta siempre y al final.
         })
-    }, []);
+    }, [categoryId, loading]);
 
-    if (estado == true){
+
+    if (loading === false){
         return(
             <div className = 'item-list-container'>
-                <h2 className = {className}>{greeting}</h2>
+                <h2 className = {className}>Catalogo</h2>
                 <ItemList products = {products}/>
             </div>
     
-        );
+    );
     }else{
         return(
             <div className='item-list-container'>
-                <h2 className = {className}>{greeting}</h2>
-                <h4 className='espera'>Su solicitud esta siendo procesada</h4>
+                <h2 className = {className}>Work-Shop</h2>
+                <Spinner/>
+                {/* <h4 className='espera'>Su solicitud esta siendo procesada</h4> */}
             </div>
         )
     }

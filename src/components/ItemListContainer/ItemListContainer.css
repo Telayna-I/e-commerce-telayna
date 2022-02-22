@@ -5,9 +5,10 @@
 
 .saludo{
     font-size: 3rem;
-    color: blue;
+    color: #151518;
     text-align: center;
     font-weight: 500;
+    margin-bottom: 3rem;
 }
 
 .products{

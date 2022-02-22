@@ -13,7 +13,9 @@
         justify-content: space-between;
         padding: 10px;
         max-width: 980px;
-        margin: 0 auto; }
+        margin: 0 auto;
+        margin: auto;
+    }
         .topheader .topnav .logo {
             display: flex;
             align-items: center;
@@ -29,23 +31,23 @@
         }
         .topheader .topnav .menu li {
             padding: 0 15px; }
-            .topheader .topnav .menu li a {
+            .topheader .topnav .menu  a {
                 color: black;
                 font-size: .875rem;
                 font-weight: 600;
                 line-height: 50px;
-                position: relative; }
+                position: relative;
+                padding: 0 8px;
+            }
 
-                .topheader .topnav .menu li a{
-                    display: flex;
-                    flex-direction: row;
+                .topheader .topnav .menu  a{
                     margin: auto;
                 }
-            .topheader .topnav .menu li a .fa-cart {
+            .topheader .topnav .menu a .fa-cart {
                 display: inline;
 
             }
-            .topheader .topnav .menu li .after::after {
+            .topheader .topnav .menu  .after::after {
                 content: "";
                 background-color: black;
                 position: absolute;

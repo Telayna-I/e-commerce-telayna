@@ -142,14 +142,23 @@ export const products = [
 ];
 
 
-export const getProducts = new Promise((resolve, reject) =>{
-    setTimeout(()=>{
-        resolve(products)
-    },2000);
-});
-
-export const getProduct = new Promise((resolve, reject) =>{
-    setTimeout(()=>{
-        resolve(products[6])
-    },2000);
-});
+export const getProduct = (id) =>{
+    return new Promise((resolve, reject) =>{
+        const prod = products.find(product => product.id === parseInt(id))
+        setTimeout(()=>{
+            resolve(prod)
+        },2000);
+    })
+}
+export const getCategory = (categoryId) =>{
+    return new Promise((resolve, reject) =>{
+        const filtro = products.filter(product => product.category === categoryId)
+        setTimeout(()=>{
+            if(categoryId){
+                resolve(filtro)
+            }else{
+                resolve(products)
+            }
+        },1000);
+    })
+}
