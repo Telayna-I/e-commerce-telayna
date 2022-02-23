@@ -41,7 +41,6 @@ const ItemListContainer = (props) =>{
             <div className='item-list-container'>
                 <h2 className = {className}>Work-Shop</h2>
                 <Spinner/>
-                {/* <h4 className='espera'>Su solicitud esta siendo procesada</h4> */}
             </div>
         )
     }

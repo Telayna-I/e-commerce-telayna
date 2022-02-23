@@ -39,9 +39,7 @@ const ItemDetailContainer = ()=>{
 
     }else{
         return(
-            <div className = "item-detail-container">
                 <Spinner/>
-            </div>
         );
     }
 
