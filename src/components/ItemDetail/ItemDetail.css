@@ -64,3 +64,19 @@
     width:15rem ;
     font-weight: 600;
 }
+
+.pagar{
+    margin: auto;
+    margin-top: 1rem;
+    padding: 0.5rem;
+    border: 2px solid  rgb(255, 247, 0);
+    border-radius: 5px;
+    font-weight: 600;
+    width:5rem ;
+    text-align: center;
+}
+
+.pagar:hover{
+    background-color: rgb(255, 247, 0) ;
+    color: black;
+}
