@@ -3,7 +3,7 @@ import './Item.css'
 import { Link } from 'react-router-dom'
 
 
-const Item = ( {product } )=>{
+const Item = ( { product } )=>{
 
     const Agregar = (numero) =>{
         console.log(`Agregue ${numero} ${product.name}`)
