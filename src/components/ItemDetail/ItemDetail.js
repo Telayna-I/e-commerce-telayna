@@ -8,13 +8,12 @@ import { CartContext } from '../../Context/CartContext';
 const ItemDetail = ({ item }) =>{
     
     const [quantity,setQuantity] = useState(0)
-    console.log(quantity)
 
     const {addToCart} = useContext(CartContext)
 
 
 
-    const Agregar = (cantidad) =>{
+    const agregar = (cantidad) =>{
         setQuantity(cantidad);
         addToCart(item,cantidad);
         
@@ -35,7 +34,7 @@ const ItemDetail = ({ item }) =>{
                 <div className = 'stock-detail'> Stock: {item.stock} unidades </div>
                 <div className = 'color-detail'> Color: {item.color} </div>
                 <div className = 'category-detail'> Categoria: {item.category} </div>
-                {quantity === 0 ? <ItemCount total = {item.stock} inicial = {0} onAdd = {Agregar}/>  : <Link className = "pagar" to = {'/cart'} >Pagar</Link> }
+                {quantity === 0 ? <ItemCount total = {item.stock} inicial = {0} onAdd = {agregar}/>  : <Link className = "pagar" to = {'/cart'} >Ir al carrito</Link> }
             </div>
         </div>
     );

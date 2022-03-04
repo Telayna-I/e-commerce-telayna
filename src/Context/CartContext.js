@@ -1,10 +1,13 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
+
 
 export const CartContext = createContext();
 
 const CartContextProvider = ({ children }) =>{
 
     const [cart, setCart] = useState([]);
+    const [items, setItems] = useState();
+    const [total, setTotal] = useState();
     
     
     const addToCart = (item, cantidad)=>{
@@ -34,9 +37,38 @@ const CartContextProvider = ({ children }) =>{
         setCart(newCart);
     }
 
-    console.table(cart)
+    const restar = (id ) =>{
+        let newCart = cart.map((p)=>p);
+        newCart.map((item)=> item.id === id && (item.cantidad --));
+        setCart(newCart);
+        contarItems();
+    }
+
+    const contarItems = () =>{
+        let quantity = 0;
+        cart.map((item)=>(quantity += item.cantidad ));
+        setItems(quantity)
+        precioTotal();
+    }
+
+    const precioTotal = () =>{
+        let finalPrice = 0;
+        cart.map((item)=>(finalPrice += item.price * item.cantidad))
+        setTotal(finalPrice)
+        
+    }
+
+    useEffect(()=>{
+        if(cart.length > 0){
+            contarItems();
+            precioTotal();
+        }
+
+    },[cart.length])
+    
+
     return (
-        <CartContext.Provider value = {{cart, addToCart,clearCart,removeItem}}>
+        <CartContext.Provider value = {{cart, addToCart,clearCart,restar,items, total,removeItem}}>
             { children }
         </CartContext.Provider>
     );

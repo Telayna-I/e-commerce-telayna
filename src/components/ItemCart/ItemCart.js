@@ -5,10 +5,13 @@ import { CartContext } from '../../Context/CartContext';
 
 
 const ItemCart = ({product}) =>{
-    const { removeItem } = useContext(CartContext)
+    const { restar, removeItem } = useContext(CartContext)
     
+    if(product.cantidad < 1){
+        removeItem(product.id)
+    }
     const handleItem = ()=>{
-        removeItem(product.id)    
+        restar(product.id)    
     }
 
     return(

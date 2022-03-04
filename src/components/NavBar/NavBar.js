@@ -1,10 +1,14 @@
 import './NavBar.css'
 import CartWidget from '../CartWidget/CartWidget.js'
 import { NavLink } from 'react-router-dom';
+import { useContext } from 'react';
+import { CartContext } from '../../Context/CartContext'
 
 
 
 const NavBar = () =>{
+
+    const { cart, items } = useContext(CartContext)
     return(
         <header className ="topheader">
             <nav className ="topnav">
@@ -28,11 +32,8 @@ const NavBar = () =>{
                     >Celulares
                     </NavLink>
 
-                    <NavLink 
-                    to = {`/cart`} className = {"after"}
 
-                    ><CartWidget size="1.3rem"/>
-                    </NavLink>
+                    {cart.length > 0 && (<NavLink to = {`/cart`} className = {"after"}><CartWidget size ="1.3rem"/> {items}</NavLink>) }
                     
                 </ul>
             </nav>
