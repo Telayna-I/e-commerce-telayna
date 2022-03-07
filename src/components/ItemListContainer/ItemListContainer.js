@@ -1,9 +1,10 @@
 import './ItemListContainer.css'
-import { getCategory } from '../../Mock/Products';
 import { useState, useEffect } from 'react';
 import ItemList from '../ItemList/ItemList';
 import { useParams } from 'react-router-dom';
 import Spinner from '../Spinner/Spinner';
+import { collection, getDocs, query, where } from 'firebase/firestore';
+import { db } from '../../services/firebase/firebase'
 
 
 const ItemListContainer = (props) =>{
@@ -15,15 +16,22 @@ const ItemListContainer = (props) =>{
 
     
     useEffect(()=>{
-        getCategory(categoryId)
-        .then(res =>{
-            setProduct(res);
+
+
+        const collectionRef = categoryId ? query(collection(db,'productos'), where('category', '==', categoryId)) : collection(db, 'productos');
+
+        getDocs(collectionRef).then(response => {
+            const products = response.docs.map(doc => {
+                return { id : doc.id, ...doc.data() }
+            })
+            console.log(products);
+            setProduct(products);
+        })
+        .catch(err => {
+            console.log('error')
+        })
+        .finally(()=>{
             setLoading(false);
-        })
-        .catch(err =>{
-            console.log('error');;
-        })
-        .finally(() =>{
         })
     }, [categoryId, loading]);
 

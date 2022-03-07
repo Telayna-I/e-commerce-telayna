@@ -8,7 +8,7 @@ import { CartContext } from '../../Context/CartContext'
 
 const NavBar = () =>{
 
-    const { cart, items } = useContext(CartContext)
+    const { cart, contarItems } = useContext(CartContext)
     return(
         <header className ="topheader">
             <nav className ="topnav">
@@ -33,7 +33,7 @@ const NavBar = () =>{
                     </NavLink>
 
 
-                    {cart.length > 0 && (<NavLink to = {`/cart`} className = {"after"}><CartWidget size ="1.3rem"/> {items}</NavLink>) }
+                    {cart.length > 0 && (<NavLink to = {`/cart`} className = {"after"}><CartWidget size ="1.3rem"/> {contarItems()}</NavLink>) }
                     
                 </ul>
             </nav>

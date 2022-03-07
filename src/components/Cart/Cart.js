@@ -7,7 +7,7 @@ import { NavLink } from 'react-router-dom'
 
 const Cart = () => {
 
-    const { cart, clearCart, total } = useContext(CartContext)
+    const { cart, clearCart, precioTotal } = useContext(CartContext)
     
     const handleCart = () =>{
         clearCart()
@@ -21,12 +21,12 @@ const Cart = () => {
                     <button className='vaciar-carrito' onClick ={handleCart}>Vaciar carrito</button>
                 </div>
                 <div className='cartt'>
-                    {cart.map((product,i)=>(
-                        <ItemCart className = "item-cart" product = {product} key = {i}  />
+                    {cart.map((product)=>(
+                        <ItemCart className = "item-cart" product = {product} key = {product.id}  />
                     ))}
                 </div>
 
-                <h4 className='precio-total' >El precio total es de: {total}</h4>
+                <h4 className='precio-total' >El precio total es de: ${precioTotal()}</h4>
             </div>
         )
     }else{

@@ -1,9 +1,10 @@
-import { getProduct } from "../../Mock/Products";
 import { useEffect, useState } from "react";
 import ItemDetail from "../ItemDetail/ItemDetail";
 import { useParams } from "react-router-dom";
 import './ItemDetailContainer.css'
 import Spinner from "../Spinner/Spinner";
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '../../services/firebase/firebase'
 
 const ItemDetailContainer = ()=>{
 
@@ -15,17 +16,16 @@ const ItemDetailContainer = ()=>{
 
 
     useEffect(() => {
-        getProduct(productId)
-        .then(res =>{
-            setArticle(res);
-            setLoading(false)
-        })
-        .catch(err =>{
-            console.log('error');;
-        })
 
-        return(() =>{
-            setArticle()
+        const docRef = doc(db, 'productos', productId);
+
+        getDoc(docRef).then( response =>{
+            const product = {id: response.id, ...response.data()}
+            setArticle(product)
+        }).catch(err =>{
+            console.log('error')
+        }).finally(()=>{
+            setLoading(false)
         })
     }, [productId])
     
