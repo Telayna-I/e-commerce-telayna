@@ -33,7 +33,8 @@ const NavBar = () =>{
                     </NavLink>
 
 
-                    {cart.length > 0 && (<NavLink to = {`/cart`} className = {"after"}><CartWidget size ="1.3rem"/> {contarItems()}</NavLink>) }
+                    {cart.length > 0 && (<NavLink to = {`/cart`} className = {"after"}><CartWidget size ="1.3rem"/> </NavLink>) }
+                    {cart.length > 0 && (<p className='cart-number'>{contarItems()}</p>)}
                     
                 </ul>
             </nav>
