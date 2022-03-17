@@ -5,24 +5,30 @@ export const CartContext = createContext();
 
 const CartContextProvider = ({ children }) =>{
 
-    const [cart, setCart] = useState([]);
-    
+    const [cart, setCart] = useState(JSON.parse(sessionStorage.getItem("carrito")) || []);
     
     const addToCart = (item, cantidad)=>{
-        if (search(item.id)) {
+        if (search(item.id)){
             sumar(item.id,cantidad)
         } else {
             setCart([ ...cart, { ...item, cantidad}]);
         }
     }
+    const saveLocal = ()=>{
+        sessionStorage.setItem("carrito", JSON.stringify(cart));
+    }
+    
+    cart.length > 0 && saveLocal();
 
     const clearCart = ()=>{
-        setCart([])
+        setCart([]);
+        saveLocal();
     }
 
     const removeItem = ( id ) =>{
-        const carroFiltrado = cart.filter((product)=> product.id !== id)
-        setCart(carroFiltrado)
+        const carroFiltrado = cart.filter((product)=> product.id !== id);
+        setCart(carroFiltrado);
+        saveLocal();
     }
 
     const search = (id) =>{

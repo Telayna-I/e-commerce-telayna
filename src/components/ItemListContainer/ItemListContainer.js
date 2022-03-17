@@ -24,7 +24,6 @@ const ItemListContainer = (props) =>{
             const products = response.docs.map(doc => {
                 return { id : doc.id, ...doc.data() }
             })
-            console.log(products);
             setProduct(products);
         })
         .catch(err => {

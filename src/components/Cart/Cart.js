@@ -9,11 +9,13 @@ import { db } from '../../services/firebase/firebase'
 
 const Cart = () => {
 
-    const { cart, clearCart, precioTotal } = useContext(CartContext)
+    const { cart, clearCart, precioTotal, removeItem } = useContext(CartContext)
     
     const vaciarCarro = () =>{
         clearCart()
     }
+
+
     
     const confirmOrder = () =>{
         const objOrder = {
@@ -40,29 +42,34 @@ const Cart = () => {
                 })
             }else{
                 outOfStock.forEach(product =>{
-                    console.log(`No hay stock de: ${product.name}`)
+                    console.log(`El producto ${product.name} no tiene stock disponible 💔`)
+                    removeItem(product.id)
                 })
             }
         }
-        
+        let cont = 0;
+
         objOrder.items.forEach(product => {
             getDoc(doc(db, 'products', product.id)).then(response =>{
                 if(response.data().stock >= product.cantidad){
                     batch.update(doc(db, 'products', response.id), {
                         stock: response.data().stock - product.cantidad
                     })
+                    cont += 1
+
                 }else{
                     outOfStock.push({id: response.id, ...response.data()})
                 }
             }).catch((error)=>{
                 console.log(error)
             }).then(()=>{
-                generateOrder()
+                cont === objOrder.items.length && generateOrder();
             })
         });
         
     }
 
+    
 
 
     if(cart.length > 0){
