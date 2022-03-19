@@ -1,7 +1,10 @@
 import { createContext, useState, useEffect } from "react";
+import { useAuth } from "./AuthContext";
 
 
 export const CartContext = createContext();
+
+
 
 const CartContextProvider = ({ children }) =>{
 

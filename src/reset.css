@@ -146,7 +146,8 @@ form , input, textarea, select , button , label{
     hyphens: auto;
     background-color: transparent;
     display: block;
-    color:inherit;
+    color:black;
+    border: none;
     /* appearance: none; opcional  */
 }
 

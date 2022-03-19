@@ -14,8 +14,6 @@ const Cart = () => {
     const vaciarCarro = () =>{
         clearCart()
     }
-
-
     
     const confirmOrder = () =>{
         const objOrder = {

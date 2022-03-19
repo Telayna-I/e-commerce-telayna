@@ -1,46 +1,42 @@
-import './LogIn.css'
+import '../LogIn/LogIn.css'
+import { useAuth } from '../../Context/AuthContext'
 import { useForm } from 'react-hook-form'
 import { FaEnvelope, FaKey } from "react-icons/fa";
 import { MdDangerous } from "react-icons/md";
-import { FcGoogle } from "react-icons/fc";
-import { useAuth } from '../../Context/AuthContext';
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useEffect } from 'react';
 
-const LogIn = ()=>{
-    const {register, formState :{errors} , handleSubmit} = useForm();
+const RegisterForm = () =>{
 
-    const { logIn,loged, error, logInWithGoogle } = useAuth();
+    const {register, formState :{errors} , handleSubmit} = useForm();
+    
+
+    const { signUp, loged, error } = useAuth();
 
     const navigate = useNavigate()
 
-    const onLogIn = async (data) =>{
+    const onRegister = async (data)=>{
         try{
-            await logIn(data.email, data.password)
+            await signUp(data.email, data.password)
         }catch(err){
-            console.log(err.message)
+            console.log(err.code)
         }
-    }
-
-    const handleGoogleSignIn = async ()=>{
-        await logInWithGoogle()
-    }
-
+    };
 
     useEffect(()=>{
-        console.log('paso por aca')
         loged && navigate('/')
     },[loged,navigate])
 
+
     return(
         <div className = 'main'>
-            <h2 className ='h2-login'>Inicia Sesion</h2>
+            <h2 className ='h2-login'>Registrate</h2>
             <div className = "log-in-container">
-                <form className='form-login' onSubmit ={handleSubmit(onLogIn)}>
+                <form className='form-login' onSubmit ={handleSubmit(onRegister)}>
                     <div className = 'campo radius-t arriba'>
                         <FaEnvelope/>
                         <input className='input-form radius-t' type = 'text'
-                        autoComplete = 'on'
+                        autoComplete = 'off'
                         placeholder = 'Email'
                         name='email'
                         {...register('email', {
@@ -55,9 +51,9 @@ const LogIn = ()=>{
                         })}
                         />
                     </div>
-                    <div className='campo radius-b'>
+                    <div className ='campo radius-b'>
                         <FaKey/>
-                        <input className='input-form radius-b' type = 'password'
+                        <input className ='input-form ' type = 'password'
                         autoComplete = 'off'
                         placeholder = 'Contraseña'
                         name='password'
@@ -73,7 +69,7 @@ const LogIn = ()=>{
                         })}
                         />
                     </div>
-                <button type="submit" value="submit" className = 'button-submit'> Iniciar Sesión</button>
+                <button type="submit" value="submit" className = 'button-submit' > Registrarse</button>
                 </form>
             </div>
             <div className='messages'>
@@ -89,27 +85,13 @@ const LogIn = ()=>{
                         {errors.password && <MdDangerous className='icon-error'/>}
                     </div>
                 </div>
+                <p className='p-cuenta'>¿Ya tienes cuenta? </p>
             </div>
-            <p className='p-cuenta'>¿Aún no tienes cuenta? </p>
-            <Link to = {'/register'} className='registrate'>¡Registrate!</Link>
-            <div className='hr'>
-                <hr className='hrr'/>
-                <p>OR</p>
-                <hr className='hrr'/>
-            </div>
-
-            <div className='btn-google'>
-                <div className='caja-boton'>
-                    <FcGoogle/>
-                </div>
-                <span className ='google' onClick={handleGoogleSignIn} >Iniciar Sesion con Google</span>
-            </div>
-
+            <Link to = {'/login'} className='registrate'>¡Logueate!</Link>
             {error && <p className='error'>{error}</p>}
         </div>
     )
+
 }
 
-
-
-export default LogIn
+export default RegisterForm
