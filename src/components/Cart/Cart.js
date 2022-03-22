@@ -1,27 +1,43 @@
 import './Cart.css'
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { CartContext } from '../../Context/CartContext'
 import ItemCart from '../ItemCart/ItemCart'
 import { NavLink } from 'react-router-dom'
 import { addDoc, collection, writeBatch, getDoc, doc, Timestamp  } from 'firebase/firestore'
 import { db } from '../../services/firebase/firebase'
+import Spinner from '../Spinner/Spinner';
+import PayForm from '../PayForm/PayForm'
+
 
 
 const Cart = () => {
+    const [confirmarCompra, setConfirmarCompra] = useState(true)
+    
 
-    const { cart, clearCart, precioTotal, removeItem } = useContext(CartContext)
+    const { cart, clearCart, precioTotal, removeItem, contact, setContact } = useContext(CartContext)
+
+    const [processingOrder, setProcessingOrder] = useState(false)
     
     const vaciarCarro = () =>{
         clearCart()
     }
+
+    const confirmPurchase = () => {
+        setConfirmarCompra(false);
+    }
+    useEffect(()=>{
+        contact.address && setProcessingOrder(true);
+        contact.address && confirmOrder()
+        contact.address && setContact({
+            address: '',
+            name: '',
+            phone: '',
+        })
+    },[contact])
     
     const confirmOrder = () =>{
         const objOrder = {
-            buyer: {
-                name: 'iniaki',
-                phone: '534856156',
-                address: 'Mi direccion 123'
-            },
+            buyer: contact,
             items: cart,
             total: precioTotal(),
             date: Timestamp.fromDate(new Date())
@@ -36,10 +52,12 @@ const Cart = () => {
                     batch.commit().then(()=>{
                         console.log(`Su orden se genero exitosamente, su numero de orden es: ${id}`)
                         clearCart()
+                        setProcessingOrder(false)
                     })
                 })
             }else{
                 outOfStock.forEach(product =>{
+                    setProcessingOrder(false)
                     console.log(`El producto ${product.name} no tiene stock disponible 💔`)
                     removeItem(product.id)
                 })
@@ -66,8 +84,22 @@ const Cart = () => {
         });
         
     }
+    useEffect(()=>{
+        if(processingOrder){
+            return(
+                <Spinner/>
+            )
+        }
+    },[processingOrder])
 
-    
+    if(cart.length === 0){
+        return(
+            <div className='info'>
+                <h2 className='h2-info'>El carrito esta vacio</h2>
+                <NavLink to={'/'} className = "go-home" >Ir a Home</NavLink>
+            </div>
+        )
+    }
 
 
     if(cart.length > 0){
@@ -83,15 +115,10 @@ const Cart = () => {
                 <h4 className='precio-total' >El precio total es de: ${precioTotal()}</h4>
                 <div className='buttons'>
                     <button className='boton-carrito' onClick ={vaciarCarro}>Vaciar carrito</button>
-                    <button className='boton-carrito' onClick ={confirmOrder}>Confirmar compra</button>
+                    {confirmarCompra && <button className='boton-carrito' onClick ={confirmPurchase}>Confirmar compra</button>}
                 </div>
-            </div>
-        )
-    }else{
-        return(
-            <div className='info'>
-                <h2 className='h2-info'>El carrito esta vacio</h2>
-                <NavLink to={'/'} className = "go-home" >Ir a Home</NavLink>
+
+                {!confirmarCompra && <PayForm/>}
             </div>
         )
     }

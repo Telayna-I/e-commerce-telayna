@@ -19,8 +19,6 @@ const ItemDetail = ({ item }) =>{
             showConfirmButton: false,
             timer: 3000,
             timerProgressBar: true,
-            // width: 430,
-            display: 'flex'
         })
         Toast.fire({
             icon: 'success',

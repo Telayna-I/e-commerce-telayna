@@ -18,6 +18,8 @@ const AuthContextProvider = ({ children }) =>{
 
     const uId = useState(JSON.parse(sessionStorage.getItem("id")) || false);
     
+    const [credential, setCredential] = useState({})
+
     const [error, setError] = useState()
 
     const [user, setUser] = useState({
@@ -58,6 +60,7 @@ const AuthContextProvider = ({ children }) =>{
                 log: true,
             })
             setLoged(true)
+            console.log(response)
         }).catch((err) =>{
             if(err.code === 'auth/wrong-password'){
                 setError('Contraseña incorrecta');
@@ -76,6 +79,7 @@ const AuthContextProvider = ({ children }) =>{
                 log: true,
             })
             setLoged(true)
+            setCredential(response._tokenResponse.displayName)
             console.log(response)
         }).catch((err)=>{
             console.log(err.code)
@@ -85,12 +89,14 @@ const AuthContextProvider = ({ children }) =>{
 
     const logOut = () =>{
         sessionStorage.clear();
-        signOut(auth);
+        signOut(auth).catch((err)=>{
+            console.log(err.code)
+        });
         setLoged(false);
     }
 
     return (
-        <AuthContext.Provider value = {{signUp, loged, uId, error, logIn, logOut, setLoged, logInWithGoogle, user}}>
+        <AuthContext.Provider value = {{signUp, loged, uId, error, logIn, logOut, setLoged, logInWithGoogle, user, credential}}>
             { children }
         </AuthContext.Provider>
     );

@@ -5,6 +5,10 @@
 
 }
 
+.swal2-toast-shown{
+    display: flex;
+}
+
 .img-details{
     width: 40%;
     border-radius: 5px;

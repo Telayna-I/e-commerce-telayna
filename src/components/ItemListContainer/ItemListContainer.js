@@ -1,7 +1,7 @@
 import './ItemListContainer.css'
 import { useState, useEffect } from 'react';
 import ItemList from '../ItemList/ItemList';
-import { useParams, Link} from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import Spinner from '../Spinner/Spinner';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../../services/firebase/firebase'
@@ -12,15 +12,12 @@ const ItemListContainer = (props) =>{
     const { className } = props;
     const [products, setProduct] = useState([]);
     const [loading, setLoading] = useState();
-    const [session, setSession] = useState(false);
     const { categoryId } = useParams()
     const { loged } = useAuth();
 
     
-    
     useEffect(()=>{
         
-        loged && setSession(loged)
         
         const collectionRef = categoryId ? query(collection(db,'products'), where('category', '==', categoryId)) : collection(db, 'products');
         
@@ -29,19 +26,17 @@ const ItemListContainer = (props) =>{
                 return { id : doc.id, ...doc.data() }
             })
             setProduct(products);
+            setLoading(false);
         })
         .catch(err => {
-            console.log('error')
-        }).finally(()=>{
-            setLoading(false);
+            console.log(err)
         })
 
     }, [categoryId, loged]);
 
 
-
     
-    if(session){
+    if(loged){
         if (loading === false){
             return(
                 <div className = 'item-list-container'>

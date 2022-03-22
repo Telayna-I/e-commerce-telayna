@@ -1,19 +1,21 @@
 import './ItemCart.css'
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { CartContext } from '../../Context/CartContext';
 
 
 
 const ItemCart = ({product}) =>{
     const { restar, removeItem } = useContext(CartContext)
-    
-    if(product.cantidad < 1){
-        removeItem(product.id)
-    }
+
     const handleItem = ()=>{
-        restar(product.id)    
+        if(product.cantidad < 1){
+            removeItem(product.id)
+        }else{
+            restar(product.id)    
+        }
     }
 
+    
     return(
         <div className='producto'>
             <div className='datos'>
