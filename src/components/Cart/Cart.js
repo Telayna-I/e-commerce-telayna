@@ -18,6 +18,8 @@ const Cart = () => {
 
     const [processingOrder, setProcessingOrder] = useState(false)
     
+    const [idCompra, setIdCompra] = useState()
+
     const vaciarCarro = () =>{
         clearCart()
     }
@@ -33,6 +35,7 @@ const Cart = () => {
             name: '',
             phone: '',
         })
+
     },[contact])
     
     const confirmOrder = () =>{
@@ -53,6 +56,7 @@ const Cart = () => {
                         console.log(`Su orden se genero exitosamente, su numero de orden es: ${id}`)
                         clearCart()
                         setProcessingOrder(false)
+                        setIdCompra(id)
                     })
                 })
             }else{
@@ -82,8 +86,8 @@ const Cart = () => {
                 cont === objOrder.items.length && generateOrder();
             })
         });
-        
     }
+
     useEffect(()=>{
         if(processingOrder){
             return(
@@ -92,14 +96,10 @@ const Cart = () => {
         }
     },[processingOrder])
 
-    if(cart.length === 0){
-        return(
-            <div className='info'>
-                <h2 className='h2-info'>El carrito esta vacio</h2>
-                <NavLink to={'/'} className = "go-home" >Ir a Home</NavLink>
-            </div>
-        )
-    }
+
+
+
+    
 
 
     if(cart.length > 0){
@@ -119,6 +119,24 @@ const Cart = () => {
                 </div>
 
                 {!confirmarCompra && <PayForm/>}
+            </div>
+        )
+    }else if(idCompra){
+        return(
+            <div className = 'info'>
+                <h2 className = 'title-info'>Gracias por tu compra  {JSON.parse(sessionStorage.getItem("name"))} ! </h2>
+                <p className='p-info'>Tu codigo de seguimiento es <span className='codigo-compra'>{idCompra}</span> </p>
+                <p className='p-info codigo-compra'>Asegurese de anotar su codigo de compra, de lo contrario no podra rastrear el pedido.</p>
+                <NavLink to={'/'} className = "go-home" >Ir a Home</NavLink>
+
+            </div>
+
+        )
+    }else{
+        return(
+            <div className = 'info'>
+                <h2 className='title-info'>El carrito esta vacio</h2>
+                <NavLink to={'/'} className = "go-home" >Ir a Home</NavLink>
             </div>
         )
     }

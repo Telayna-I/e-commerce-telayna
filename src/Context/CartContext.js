@@ -20,10 +20,15 @@ const CartContextProvider = ({ children }) =>{
             setCart([ ...cart, { ...item, cantidad}]);
         }
     }
-
+    const [contact, setContact] = useState({
+        address: '',
+        name: '',
+        phone: '',
+    });
     
     const saveLocal = ()=>{
         sessionStorage.setItem("carrito", JSON.stringify(cart));
+        sessionStorage.setItem("name", JSON.stringify(contact.name));
     }
     
     cart.length > 0 && saveLocal();
@@ -73,11 +78,7 @@ const CartContextProvider = ({ children }) =>{
     
     const [confirmForm, setConfirmForm,] = useState(false);
     
-    const [contact, setContact] = useState({
-        address: '',
-        name: '',
-        phone: '',
-    });
+    
     
     const infoContact = (data) => {
         return setContact({
@@ -91,10 +92,9 @@ const CartContextProvider = ({ children }) =>{
         if(cart.length > 0){
             contarItems();
             precioTotal();
-            cart.map((item)=>{
-                item.cantidad === 0 && removeItem(item.id)
-            })
+            cart.map((item)=> item.cantidad === 0 && removeItem(item.id))
         }
+        saveLocal()
 
     },[cart,contact])
     

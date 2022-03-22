@@ -1,6 +1,7 @@
 import { useContext } from 'react'
+import './PayForm.css'
 import { useForm } from 'react-hook-form'
-import { FaEnvelope } from "react-icons/fa";
+import { FaEnvelope, FaPhoneAlt, FaAddressCard } from "react-icons/fa";
 import { MdDangerous } from "react-icons/md";
 import { useAuth } from '../../Context/AuthContext';
 import { CartContext } from '../../Context/CartContext'
@@ -21,8 +22,8 @@ const PayForm = () => {
     console.log(contact)
 
     return(
-        <>
-            <h2 className ='h2-form'>Datos para el envio</h2>
+        <div className = 'pay-form'>
+            <h2 className ='h2-pay-form'>Datos para el envio</h2>
             <div className = "shipping-form-container">
                 <form className='shipping-form' onSubmit ={handleSubmit(onSubmit)}>
                     {!credential.length > 0 && <div className = 'campo radius-t arriba'>
@@ -44,7 +45,7 @@ const PayForm = () => {
                         />
                     </div>}
                     <div className = 'campo radius-t arriba'>
-                        <FaEnvelope/>
+                        <FaPhoneAlt/>
                         <input className='input-form radius-t' type = 'text'
                         autoComplete = 'off'
                         placeholder = 'Telefono'
@@ -65,8 +66,8 @@ const PayForm = () => {
                         })}
                         />
                     </div>
-                    <div className = 'campo radius-t arriba'>
-                        <FaEnvelope/>
+                    <div className = 'campo radius-b abajo'>
+                        <FaAddressCard/>
                         <input className='input-form radius-t' type = 'text'
                         autoComplete = 'off'
                         placeholder = 'Direccion'
@@ -101,7 +102,7 @@ const PayForm = () => {
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 

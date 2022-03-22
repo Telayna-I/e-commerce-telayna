@@ -7,7 +7,9 @@
     border-radius: 7px;
     margin-left: 2rem;
 }
-
+.card-image{
+    width: 5rem;
+}
 .card-title{
     text-align: center;
     padding: 1.5rem;
