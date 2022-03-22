@@ -8,6 +8,7 @@ import RegisterForm from './components/RegisterForm/RegisterForm';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import CartContextProvider from './Context/CartContext';
 import AuthContextProvider  from './Context/AuthContext';
+import PrivateRoutes from './components/PrivateRoutes/PrivateRoutes';
 
 function App() {
   return (
@@ -17,12 +18,25 @@ function App() {
           <BrowserRouter>
             <NavBar/>
               <Routes>
-                <Route path = '/' element = {<ItemListContainer greeting = "Hola Mundo !" className = "saludo" />}/>
+                {/* Rutas Publicas */}
                 <Route path = '/login' element = {<LogIn/>}/>
                 <Route path = '/register' element = {<RegisterForm/>}/>
-                <Route path = '/category/:categoryId' element = {<ItemListContainer className = "saludo"/>}/>
-                <Route path = '/detail/:productId' element = {<ItemDetailContainer/>}/>
-                <Route path = '/cart' element = {<Cart/>}/>
+
+                {/* Rutas Privadas */}
+                <Route>
+                    <Route element = {<PrivateRoutes />} >
+                        <Route path = '/' element = {<ItemListContainer className = "saludo" />}/>
+                        <Route path = '/category/:categoryId' element = {<ItemListContainer className = "saludo"/>}/>
+                        <Route path = '/cart' element = {<Cart/>}/>
+                        <Route path = '/detail/:productId' element = {<ItemDetailContainer/>}/>
+                    </Route>
+                </Route>
+
+                {/* Rutas anteriores, ahora son privadas */}
+                {/* <Route path = '/' element = {<ItemListContainer className = "saludo" />}/> */}
+                {/* <Route path = '/category/:categoryId' element = {<ItemListContainer className = "saludo"/>}/> */}
+                {/* <Route path = '/detail/:productId' element = {<ItemDetailContainer/>}/> */}
+                {/* <Route path = '/cart' element = {<Cart/>}/> */}
               </Routes>
           </BrowserRouter>
         </CartContextProvider>

@@ -1,4 +1,7 @@
 .topheader {
+    display: flex;
+    flex-direction: row;
+
     box-shadow: 0 4px 5px var(--navbar-shallow-color);
     position: fixed;
     height: 70px;
@@ -12,7 +15,9 @@
         align-items: center;
         justify-content: space-between;
         padding: 10px;
+        width: 100vw;
         max-width: 980px;
+        
         margin: 0 auto;
         margin: auto;
     }
@@ -24,6 +29,7 @@
             color: var(--primary-color); }
         .topheader .topnav .menu {
             display: flex;
+            justify-content: center;
             list-style: none;
             margin: 0;
             padding: 0;
@@ -72,4 +78,20 @@
 }
 .cart{
     padding-right: 0.5rem;
+}
+
+.log-out{
+    font-weight: bold;
+    font-size: .875rem;
+    cursor: pointer;
+    margin-left: 5rem;
+    padding: 0.2rem;
+
+    transition: 0.2s ease-in;
+}
+
+.log-out:hover{
+    background-color: #00AAB2;
+    border-radius: 0.2rem;
+    color: white
 }

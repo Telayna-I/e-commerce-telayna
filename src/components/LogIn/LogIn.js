@@ -23,12 +23,15 @@ const LogIn = ()=>{
     }
 
     const handleGoogleSignIn = async ()=>{
-        await logInWithGoogle()
+        try{
+            await logInWithGoogle()
+        }catch(err){
+            console.log(err.code)
+        }
     }
 
 
     useEffect(()=>{
-        console.log('paso por aca')
         loged && navigate('/')
     },[loged,navigate])
 
