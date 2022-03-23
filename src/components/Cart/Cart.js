@@ -7,6 +7,8 @@ import { addDoc, collection, writeBatch, getDoc, doc, Timestamp  } from 'firebas
 import { db } from '../../services/firebase/firebase'
 import Spinner from '../Spinner/Spinner';
 import PayForm from '../PayForm/PayForm'
+import { useAuth } from '../../Context/AuthContext'
+import Swal from 'sweetalert2';
 
 
 
@@ -14,11 +16,13 @@ const Cart = () => {
     const [confirmarCompra, setConfirmarCompra] = useState(true)
     
 
-    const { cart, clearCart, precioTotal, removeItem, contact, setContact } = useContext(CartContext)
+    const { cart, clearCart, precioTotal, removeItem } = useContext(CartContext)
 
     const [processingOrder, setProcessingOrder] = useState(false)
     
     const [idCompra, setIdCompra] = useState()
+
+    const { contact, setContact} = useAuth()
 
     const vaciarCarro = () =>{
         clearCart()
@@ -37,6 +41,22 @@ const Cart = () => {
         })
 
     },[contact])
+
+
+    const alerta = ((prod)=>{
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+        })
+        Toast.fire({
+            icon: 'error',
+            title: `El producto ${prod.name} no tiene stock disponible 💔`,
+        })
+
+    }) 
     
     const confirmOrder = () =>{
         const objOrder = {
@@ -53,7 +73,6 @@ const Cart = () => {
             if(outOfStock.length === 0){
                 addDoc(collection(db,'orders'), objOrder).then(({id}) =>{
                     batch.commit().then(()=>{
-                        console.log(`Su orden se genero exitosamente, su numero de orden es: ${id}`)
                         clearCart()
                         setProcessingOrder(false)
                         setIdCompra(id)
@@ -62,7 +81,8 @@ const Cart = () => {
             }else{
                 outOfStock.forEach(product =>{
                     setProcessingOrder(false)
-                    console.log(`El producto ${product.name} no tiene stock disponible 💔`)
+                    console.log(product.name)
+                    alerta(product)
                     removeItem(product.id)
                 })
             }
@@ -79,6 +99,7 @@ const Cart = () => {
 
                 }else{
                     outOfStock.push({id: response.id, ...response.data()})
+                    cont += 1
                 }
             }).catch((error)=>{
                 console.log(error)
@@ -88,21 +109,22 @@ const Cart = () => {
         });
     }
 
-    useEffect(()=>{
-        if(processingOrder){
-            return(
-                <Spinner/>
-            )
-        }
-    },[processingOrder])
-
-
-
-
     
+    useEffect(()=>{
 
-
-    if(cart.length > 0){
+    },[processingOrder])
+    
+    
+    
+    
+    if(processingOrder){
+        return(
+            <div className='spinner-container'>
+                <h2 className='procesando'>Su orden esta siendo procesada...</h2>
+                <Spinner className = 'spinner-processin' />
+            </div>
+        )
+    }else if(cart.length > 0){
         return(
             <div className = 'cart-container'>
                 <h2 className='title'>Carrito</h2>
@@ -116,6 +138,7 @@ const Cart = () => {
                 <div className='buttons'>
                     <button className='boton-carrito' onClick ={vaciarCarro}>Vaciar carrito</button>
                     {confirmarCompra && <button className='boton-carrito' onClick ={confirmPurchase}>Confirmar compra</button>}
+                    <NavLink className = 'boton-carrito' to = {'/'} >Seguir comprando</NavLink>
                 </div>
 
                 {!confirmarCompra && <PayForm/>}

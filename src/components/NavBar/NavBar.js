@@ -58,7 +58,7 @@ const NavBar = () =>{
                     {cart.length > 0 && loged && (<NavLink to = {`/cart`} className = {"after"}><CartWidget size ="1.3rem"/> </NavLink>) }
                     {cart.length > 0 && loged && (<p className='cart-number'>{contarItems()}</p>)}
 
-                    {loged && <p className={"log-out"} onClick={signOut} >Logout</p>}
+                    {loged && <div className={"log-out"} onClick={signOut} >Logout</div>}
                     
                 </ul>
             </nav>

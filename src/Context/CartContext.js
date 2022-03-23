@@ -1,5 +1,4 @@
 import { createContext, useState, useEffect } from "react";
-import { useAuth } from "./AuthContext";
 
 
 
@@ -11,7 +10,6 @@ const CartContextProvider = ({ children }) =>{
 
     const [cart, setCart] = useState(JSON.parse(sessionStorage.getItem("carrito")) || []);
 
-    const { credential } = useAuth()
     
     const addToCart = (item, cantidad)=>{
         if (search(item.id)){
@@ -20,15 +18,10 @@ const CartContextProvider = ({ children }) =>{
             setCart([ ...cart, { ...item, cantidad}]);
         }
     }
-    const [contact, setContact] = useState({
-        address: '',
-        name: '',
-        phone: '',
-    });
+
     
     const saveLocal = ()=>{
-        sessionStorage.setItem("carrito", JSON.stringify(cart));
-        sessionStorage.setItem("name", JSON.stringify(contact.name));
+        window.sessionStorage.setItem("carrito", JSON.stringify(cart));
     }
     
     cart.length > 0 && saveLocal();
@@ -80,13 +73,7 @@ const CartContextProvider = ({ children }) =>{
     
     
     
-    const infoContact = (data) => {
-        return setContact({
-            address: data.address,
-            name: data.name || credential,
-            phone: data.phone,
-        })
-    }
+    
     
     useEffect(()=>{
         if(cart.length > 0){
@@ -94,14 +81,14 @@ const CartContextProvider = ({ children }) =>{
             precioTotal();
             cart.map((item)=> item.cantidad === 0 && removeItem(item.id))
         }
-        saveLocal()
+        
 
-    },[cart,contact])
+    },[cart])
     
     
 
     return (
-        <CartContext.Provider value = {{cart, addToCart,clearCart,restar,contarItems, precioTotal,removeItem, contact, setContact, confirmForm, setConfirmForm, infoContact}}>
+        <CartContext.Provider value = {{cart, addToCart,clearCart,restar,contarItems, precioTotal,removeItem,  confirmForm, setConfirmForm}}>
             { children }
         </CartContext.Provider>
     );

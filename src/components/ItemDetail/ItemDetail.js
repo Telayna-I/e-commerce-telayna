@@ -28,9 +28,12 @@ const ItemDetail = ({ item }) =>{
 
 
     const agregar = (cantidad) =>{
-        setQuantity(cantidad);
-        addToCart(item,cantidad);
-        alerta()
+        if(cantidad > 0){
+            setQuantity(cantidad);
+            addToCart(item,cantidad);
+            console.log(addToCart)
+            alerta()
+        }
         
     }
 

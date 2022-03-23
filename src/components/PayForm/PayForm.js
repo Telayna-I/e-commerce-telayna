@@ -1,19 +1,15 @@
-import { useContext } from 'react'
 import './PayForm.css'
 import { useForm } from 'react-hook-form'
 import { FaEnvelope, FaPhoneAlt, FaAddressCard } from "react-icons/fa";
 import { MdDangerous } from "react-icons/md";
 import { useAuth } from '../../Context/AuthContext';
-import { CartContext } from '../../Context/CartContext'
 
 
 const PayForm = () => {
 
     const {register, formState :{errors} , handleSubmit} = useForm();
 
-    const { credential } = useAuth()
-
-    const { infoContact, contact } = useContext(CartContext)
+    const { credential, infoContact, contact } = useAuth()
 
     const onSubmit = (data) => {
         infoContact(data)

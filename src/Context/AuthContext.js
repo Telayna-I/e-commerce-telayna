@@ -26,18 +26,22 @@ const AuthContextProvider = ({ children }) =>{
         uId: '',
         log: 'false'
     })
-
+    const [contact, setContact] = useState({
+        address: '',
+        name: '',
+        phone: '',
+    });    
 
     useEffect(()=>{
         if(user.log === 'false'){
             
         }else{
-            user.log && sessionStorage.setItem("loged", JSON.stringify(user.log));
-            user.log && sessionStorage.setItem("id", JSON.stringify(user.uId));
+            user.log && window.sessionStorage.setItem("loged", JSON.stringify(user.log));
+            user.log && window.sessionStorage.setItem("id", JSON.stringify(user.uId));
+            window.sessionStorage.setItem("name", JSON.stringify(contact.name))
         }
-    },[user])
-    
-    
+    },[user, contact])
+
 
     const signUp = (email, password)=>{
         createUserWithEmailAndPassword(auth, email, password).then((response)=>{
@@ -95,8 +99,16 @@ const AuthContextProvider = ({ children }) =>{
         setLoged(false);
     }
 
+    const infoContact = (data) => {
+        return setContact({
+            address: data.address,
+            name: data.name || credential,
+            phone: data.phone,
+        })
+    }
+
     return (
-        <AuthContext.Provider value = {{signUp, loged, uId, error, logIn, logOut, setLoged, logInWithGoogle, user, credential}}>
+        <AuthContext.Provider value = {{signUp, loged, uId, error, logIn, logOut, setLoged, logInWithGoogle, user, credential, infoContact, contact, setContact}}>
             { children }
         </AuthContext.Provider>
     );
