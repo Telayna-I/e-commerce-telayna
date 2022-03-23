@@ -81,6 +81,7 @@ const CartContextProvider = ({ children }) =>{
             precioTotal();
             cart.map((item)=> item.cantidad === 0 && removeItem(item.id))
         }
+        saveLocal()
         
 
     },[cart])

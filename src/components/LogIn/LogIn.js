@@ -10,13 +10,13 @@ import { useEffect } from 'react';
 const LogIn = ()=>{
     const {register, formState :{errors} , handleSubmit} = useForm();
 
-    const { logIn,loged, error, logInWithGoogle } = useAuth();
+    const { iniciarSesion,loged, error, iniciarSesionGoogle } = useAuth();
 
     const navigate = useNavigate()
 
     const onLogIn = async (data) =>{
         try{
-            await logIn(data.email, data.password)
+            await iniciarSesion(data.email, data.password)
         }catch(err){
             console.log(err.message)
         }
@@ -24,7 +24,7 @@ const LogIn = ()=>{
 
     const handleGoogleSignIn = async ()=>{
         try{
-            await logInWithGoogle()
+            await iniciarSesionGoogle()
         }catch(err){
             console.log(err.code)
         }

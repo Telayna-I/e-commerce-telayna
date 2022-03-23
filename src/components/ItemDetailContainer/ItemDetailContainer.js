@@ -3,8 +3,7 @@ import ItemDetail from "../ItemDetail/ItemDetail";
 import { useParams } from "react-router-dom";
 import './ItemDetailContainer.css'
 import Spinner from "../Spinner/Spinner";
-import { doc, getDoc } from 'firebase/firestore';
-import { db } from '../../services/firebase/firebase'
+import { getDetail } from '../../services/firebase/firebase'
 
 const ItemDetailContainer = ()=>{
 
@@ -16,12 +15,8 @@ const ItemDetailContainer = ()=>{
 
 
     useEffect(() => {
-
-        const docRef = doc(db, 'products', productId);
-
-        getDoc(docRef).then( response =>{
-            const product = {id: response.id, ...response.data()}
-            setArticle(product)
+        getDetail(productId).then(response =>{
+            setArticle(response)
         }).catch(err =>{
             console.log('error')
         }).finally(()=>{

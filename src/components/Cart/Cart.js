@@ -81,9 +81,9 @@ const Cart = () => {
             }else{
                 outOfStock.forEach(product =>{
                     setProcessingOrder(false)
-                    console.log(product.name)
                     alerta(product)
                     removeItem(product.id)
+                    window.sessionStorage.setItem("carrito", JSON.stringify(cart))
                 })
             }
         }
@@ -110,11 +110,6 @@ const Cart = () => {
     }
 
     
-    useEffect(()=>{
-
-    },[processingOrder])
-    
-    
     
     
     if(processingOrder){
@@ -124,6 +119,7 @@ const Cart = () => {
                 <Spinner className = 'spinner-processin' />
             </div>
         )
+
     }else if(cart.length > 0){
         return(
             <div className = 'cart-container'>
@@ -147,7 +143,7 @@ const Cart = () => {
     }else if(idCompra){
         return(
             <div className = 'info'>
-                <h2 className = 'title-info'>Gracias por tu compra  {JSON.parse(sessionStorage.getItem("name"))} ! </h2>
+                <h2 className = 'title-info'>Gracias por tu compra ! </h2>
                 <p className='p-info'>Tu codigo de seguimiento es <span className='codigo-compra'>{idCompra}</span> </p>
                 <p className='p-info codigo-compra'>Asegurese de anotar su codigo de compra, de lo contrario no podra rastrear el pedido.</p>
                 <NavLink to={'/'} className = "go-home" >Ir a Home</NavLink>

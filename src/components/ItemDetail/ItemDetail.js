@@ -31,7 +31,6 @@ const ItemDetail = ({ item }) =>{
         if(cantidad > 0){
             setQuantity(cantidad);
             addToCart(item,cantidad);
-            console.log(addToCart)
             alerta()
         }
         

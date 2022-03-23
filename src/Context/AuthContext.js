@@ -1,6 +1,6 @@
 import { createContext, useState, useContext, useEffect } from "react";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, GoogleAuthProvider, signInWithPopup} from "firebase/auth";
-import { auth } from "../services/firebase/firebase";
+import { signOut } from "firebase/auth";
+import { auth, logInWithGoogle, signUp, logIn  } from "../services/firebase/firebase";
 
 
 export const AuthContext = createContext();
@@ -43,8 +43,8 @@ const AuthContextProvider = ({ children }) =>{
     },[user, contact])
 
 
-    const signUp = (email, password)=>{
-        createUserWithEmailAndPassword(auth, email, password).then((response)=>{
+    const registrarse = (email, password)=>{
+        signUp(email,password).then(response =>{
             setUser({
                 uId: response._tokenResponse.localId,
                 log: true,
@@ -56,15 +56,11 @@ const AuthContextProvider = ({ children }) =>{
             }
         })
     }
-
-    const logIn = (email,password)=>{
-        signInWithEmailAndPassword(auth, email, password).then((response)=>{
-            setUser({
-                uId: response._tokenResponse.localId,
-                log: true,
-            })
+    
+    const iniciarSesion = (email,password) => {
+        logIn(email,password).then(response =>{
+            setUser(response)
             setLoged(true)
-            console.log(response)
         }).catch((err) =>{
             if(err.code === 'auth/wrong-password'){
                 setError('Contraseña incorrecta');
@@ -75,16 +71,14 @@ const AuthContextProvider = ({ children }) =>{
         })
     }
 
-    const logInWithGoogle = ()=>{
-        const googleProvider = new GoogleAuthProvider();
-        signInWithPopup(auth, googleProvider).then((response)=>{
+    const iniciarSesionGoogle = ()=>{
+        logInWithGoogle().then(response =>{
             setUser({
                 uId: response._tokenResponse.localId,
                 log: true,
             })
             setLoged(true)
             setCredential(response._tokenResponse.displayName)
-            console.log(response)
         }).catch((err)=>{
             console.log(err.code)
         })
@@ -108,7 +102,7 @@ const AuthContextProvider = ({ children }) =>{
     }
 
     return (
-        <AuthContext.Provider value = {{signUp, loged, uId, error, logIn, logOut, setLoged, logInWithGoogle, user, credential, infoContact, contact, setContact}}>
+        <AuthContext.Provider value = {{registrarse, loged, uId, error, iniciarSesion, logOut, setLoged, iniciarSesionGoogle, user, credential, infoContact, contact, setContact}}>
             { children }
         </AuthContext.Provider>
     );

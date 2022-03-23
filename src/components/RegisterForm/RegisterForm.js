@@ -11,13 +11,13 @@ const RegisterForm = () =>{
     const {register, formState :{errors} , handleSubmit} = useForm();
     
 
-    const { signUp, loged, error } = useAuth();
+    const { registrarse, loged, error } = useAuth();
 
     const navigate = useNavigate()
 
     const onRegister = async (data)=>{
         try{
-            await signUp(data.email, data.password)
+            await registrarse(data.email, data.password)
         }catch(err){
             console.log(err.code)
         }
