@@ -9,9 +9,9 @@
     display: flex;
 }
 
-.img-details{
-    width: 40%;
-    border-radius: 5px;
+.img-detailss{
+    width: 50%;
+    border-radius: 1rem;
     object-fit: contain;
 }
 
@@ -19,6 +19,7 @@
     display: flex;
     flex-direction: column;
     width: 30rem;
+    align-items: flex-end;
 }
 
 .title-detail{
@@ -70,7 +71,6 @@
 }
 
 .pagar{
-    margin: auto;
     margin-top: 1rem;
     padding: 0.5rem;
     border: 2px solid  rgb(255, 247, 0);

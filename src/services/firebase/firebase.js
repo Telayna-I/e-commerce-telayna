@@ -57,7 +57,6 @@ export const logIn = (email,password) => {
                 uId: response._tokenResponse.localId,
                 log: true,
             })
-            console.log(response)
         }).catch((err)=>{
             reject(err)
         })
@@ -69,7 +68,6 @@ export const logInWithGoogle = () => {
         const googleProvider = new GoogleAuthProvider();
         signInWithPopup(auth, googleProvider).then((response)=>{
             resolve(response)
-            console.log(response)
         }).catch((err)=>{
             reject(err)
         })

@@ -18,11 +18,9 @@ function App() {
           <BrowserRouter>
             <NavBar/>
               <Routes>
-                {/* Rutas Publicas */}
                 <Route path = '/login' element = {<LogIn/>}/>
                 <Route path = '/register' element = {<RegisterForm/>}/>
 
-                {/* Rutas Privadas */}
                 <Route>
                     <Route element = {<PrivateRoutes />} >
                         <Route path = '/' element = {<ItemListContainer className = "saludo" />}/>
@@ -31,12 +29,7 @@ function App() {
                         <Route path = '/detail/:productId' element = {<ItemDetailContainer/>}/>
                     </Route>
                 </Route>
-
-                {/* Rutas anteriores, ahora son privadas */}
-                {/* <Route path = '/' element = {<ItemListContainer className = "saludo" />}/> */}
-                {/* <Route path = '/category/:categoryId' element = {<ItemListContainer className = "saludo"/>}/> */}
-                {/* <Route path = '/detail/:productId' element = {<ItemDetailContainer/>}/> */}
-                {/* <Route path = '/cart' element = {<Cart/>}/> */}
+                
               </Routes>
           </BrowserRouter>
         </CartContextProvider>

@@ -18,7 +18,7 @@ const ItemDetailContainer = ()=>{
         getDetail(productId).then(response =>{
             setArticle(response)
         }).catch(err =>{
-            console.log('error')
+            console.log(err)
         }).finally(()=>{
             setLoading(false)
         })

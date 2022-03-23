@@ -9,13 +9,12 @@ const PayForm = () => {
 
     const {register, formState :{errors} , handleSubmit} = useForm();
 
-    const { credential, infoContact, contact } = useAuth()
+    const { credential, infoContact } = useAuth()
 
     const onSubmit = (data) => {
         infoContact(data)
     }
     
-    console.log(contact)
 
     return(
         <div className = 'pay-form'>
