@@ -11,8 +11,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 /* Aquí definimos las Custom properties */
 :root{
-  --color-primario   : #181818;
-  --color-secundario : #f0f0f0;
+
+  --color-primario   : #f0f0f0;
+  --color-secundario : #181818; 
 
   /* Tipografía */
   --tipo-principal   : 'Poppins', Arial, sans-serif;
@@ -22,8 +23,14 @@
 /* Las adaptamos al modo oscuro */
 @media (prefers-color-scheme: dark) {
   :root{
-    --color-primario   : #f0f0f0;
-    --color-secundario : #181818;  
+    --color-primario   : #181818;
+    --color-secundario : #f0f0f0;
+  }
+}
+@media (prefers-color-scheme: light) {
+  :root{
+    --color-primario   : #181818;
+    --color-secundario : #f0f0f0;  
   }
 }
 
@@ -146,7 +153,8 @@ form , input, textarea, select , button , label{
     hyphens: auto;
     background-color: transparent;
     display: block;
-    color:inherit;
+    color:black;
+    border: none;
     /* appearance: none; opcional  */
 }
 

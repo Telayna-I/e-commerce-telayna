@@ -1,28 +1,40 @@
 import { createContext, useState, useEffect } from "react";
 
 
+
 export const CartContext = createContext();
+
+
 
 const CartContextProvider = ({ children }) =>{
 
-    const [cart, setCart] = useState([]);
-    
+    const [cart, setCart] = useState(JSON.parse(sessionStorage.getItem("carrito")) || []);
+
     
     const addToCart = (item, cantidad)=>{
-        if (search(item.id)) {
+        if (search(item.id)){
             sumar(item.id,cantidad)
         } else {
             setCart([ ...cart, { ...item, cantidad}]);
         }
     }
 
+    
+    const saveLocal = ()=>{
+        window.sessionStorage.setItem("carrito", JSON.stringify(cart));
+    }
+    
+    cart.length > 0 && saveLocal();
+
     const clearCart = ()=>{
-        setCart([])
+        setCart([]);
+        saveLocal();
     }
 
     const removeItem = ( id ) =>{
-        const carroFiltrado = cart.filter((product)=> product.id !== id)
-        setCart(carroFiltrado)
+        const carroFiltrado = cart.filter((product)=> product.id !== id);
+        setCart(carroFiltrado);
+        saveLocal();
     }
 
     const search = (id) =>{
@@ -56,17 +68,28 @@ const CartContextProvider = ({ children }) =>{
         
     }
 
+    
+    const [confirmForm, setConfirmForm,] = useState(false);
+    
+    
+    
+    
+    
     useEffect(()=>{
         if(cart.length > 0){
             contarItems();
             precioTotal();
+            cart.map((item)=> item.cantidad === 0 && removeItem(item.id))
         }
+        saveLocal()
+        
 
-    },[cart.length])
+    },[cart])
+    
     
 
     return (
-        <CartContext.Provider value = {{cart, addToCart,clearCart,restar,contarItems, precioTotal,removeItem}}>
+        <CartContext.Provider value = {{cart, addToCart,clearCart,restar,contarItems, precioTotal,removeItem,  confirmForm, setConfirmForm}}>
             { children }
         </CartContext.Provider>
     );

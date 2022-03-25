@@ -1,11 +1,14 @@
 .item-detail-container{
     display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 80%;
-    background-color: #c4c4c4c4;
-    border-radius: 0.5rem ;
+    height: 30rem;
+    width: 60rem;
+    background-color: #f0f0f0;
     margin: auto;
     margin-top: 4rem;
     margin-bottom: 4rem;
+}
+
+.swal2-toast-shown{
+    position: relative;
+    display: flex;
 }
