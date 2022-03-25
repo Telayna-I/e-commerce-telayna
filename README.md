@@ -1,5 +1,44 @@
 # WorkShop React Js.
 
+## Desarrollo.
+
+A lo largo del proyecto se emplearon diversas herramientas provistas por react, react-rooter-dom y firebase entre otras, como por ejemplo:
+
+** React **
+
+- useEffect para poder detectar cambios en las propiedades o estados de un componente.
+- useState para poder efectyuar cambios en los distintos estados repartidos por la aplicacion.
+- useContext para poder envolver mi aplicacion en contextos que facilitan el llamado a funciones relacionadas con ciertos componentes.
+
+** React-router-dom **
+
+- useParams para obtener la ruta en la que estamos parados y asi poder filtrar.
+- useNavigate para poder redireccionar luego de ciertas acciones.
+- link para poder acceder a ciertas rutas establecidas (suplantando a la etiqueta a ).
+- navlink para las rutas del nav.
+- Outlet para poder establecer rutas privadas las cuales se pueden acceder luego del registro o logueo de usuario.
+
+** React-hook-form **
+
+- useForm para poder implementar los formularios de registro, logueo y de finalizacion de compra.
+
+** Firebase **
+
+- collection.
+- getDocs.
+- query.
+- where.
+- getFirestore.
+- doc.
+- getDoc.
+- createUserWithEmailAndPassword.
+- signInWithEmailAndPassword.
+- GoogleAuthProvider.
+- signInWithPopup.
+
+Para poder gestionar todo lo que tiene que ver con la base de datos y gestion de usuarios en Firebase.
+
+
 ## Descripcion.
 
 Ecommerce desarrollado con ReactJs, que cuenta con funciones de logeo y registro de usuarios. Ademas permite visualizar un listado total de productos, filtrar por categorias a dichos productos con la posibilidad de ver en detalle las caracteristicas del producto, en donde podremos agregar al carrito de compra la cantidad deseada de productos. Ya en el carrito permite hacer modificaciones de las cantidades de los items sumados, vaciar el carro por completo, seguir comprando o confirmar la compra.
@@ -63,6 +102,14 @@ Libreria que provee de una gran cantidad de inconos, los cuales se utilizaron pa
 ### SweetAlert 2.
 
 Esta fue utilizada para la utilizacion de un Toast luego de que se agrega un producto al carrito o cuando dicho producto no posee stock suficiente para poder comprar.
+
+### React-loader-spinner.
+
+Nos proporciona una gran lista de spinners de la cual elegi uno y lo utilice en el proyecto.
+
+### React-hook-form.
+
+Utilizada para la creacion y validacion de formularios.
 
 ### Firebase.
 
