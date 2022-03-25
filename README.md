@@ -4,25 +4,27 @@
 
 A lo largo del proyecto se emplearon diversas herramientas provistas por react, react-rooter-dom y firebase entre otras, como por ejemplo:
 
-** React **
+**React**
 
 - useEffect para poder detectar cambios en las propiedades o estados de un componente.
 - useState para poder efectyuar cambios en los distintos estados repartidos por la aplicacion.
 - useContext para poder envolver mi aplicacion en contextos que facilitan el llamado a funciones relacionadas con ciertos componentes.
 
-** React-router-dom **
+**React-router-dom**
 
 - useParams para obtener la ruta en la que estamos parados y asi poder filtrar.
 - useNavigate para poder redireccionar luego de ciertas acciones.
-- link para poder acceder a ciertas rutas establecidas (suplantando a la etiqueta a ).
-- navlink para las rutas del nav.
+- Routes para envolver las rutas con las que voy a trabajar.
+- Route para definir cada ruta con la propiedad path, en caso de tener :category o :productId quiere decir que lo que va despues de los : va a variar y element es el componente que se va a renderizar. (dichas rutas se encuentran en el archivo app)
+- Link para poder acceder a ciertas rutas establecidas (suplantando a la etiqueta a ).
+- NavLink para las rutas del nav.
 - Outlet para poder establecer rutas privadas las cuales se pueden acceder luego del registro o logueo de usuario.
 
-** React-hook-form **
+**React-hook-form**
 
 - useForm para poder implementar los formularios de registro, logueo y de finalizacion de compra.
 
-** Firebase **
+**Firebase**
 
 - collection.
 - getDocs.
@@ -162,12 +164,12 @@ npm start
 
 ### Estructura de archivos.
 
-Dentro de Firebase acceder a Cloud Firestore, una vez dentro presionar en [ + iniciar coleccion].
+Dentro de Firebase acceder a Cloud Firestore, una vez dentro presionar en [+ iniciar coleccion].
 
 En el campo ID de la coleccion tendremos que introducir la palabra [products] como ID.
 
 
-Luego, dentro de la coleccion products tendremos que agregar nuestros productos clickeando en [ + Agregar documento]
+Luego, dentro de la coleccion products tendremos que agregar nuestros productos clickeando en [+ Agregar documento]
 
 Dentro, para nuestros productos, eligiremos un id aleatorio proporcionado por Firebase.
 
@@ -190,12 +192,28 @@ Una vez terminada la carga de productos y generadas las categorias recien ahi po
 
 
 
+
 ### Google Auth.
 
 Para que Nuestro usuario pueda registrarse, loguearse e iniciar sesion con Goole debemos tener activados estos 2 proveedores de acceso.
 
 [![auth.png](https://i.postimg.cc/7Ypr06Td/auth.png)](https://postimg.cc/TpqsXT0J)
 
+
+### Eliminar parte del package.json.
+
+[![eliminar-esto.png](https://i.postimg.cc/hjhr1Gh5/eliminar-esto.png)](https://postimg.cc/njbBHp44)
+
+Eliminando esto podremos correr el proyecto en local.
+
+
+### Orders.
+
+Luego de que se efectue una compra, dentro de la base de datos de firebase, se creara una coleccion llamada orders donde se van a encontrar todas las ordenes de compra generadas por los distintos usuarios.
+
+En caso de querer programar un componente que permita renderizar la lista de ordenes de compras tener en cuenta que trabaja con estos parametros:
+
+[![orders.png](https://i.postimg.cc/Y9LwyY9c/orders.png)](https://postimg.cc/R6m8W3KG)
 
 
 ## Hasta este paso la aplicacion ya deberia estar funcionando con normalidad.
