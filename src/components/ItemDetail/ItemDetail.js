@@ -42,18 +42,20 @@ const ItemDetail = ({ item }) =>{
 
 
     return(
-        <div className = 'detail'>
-            <img className = 'img-detailss' src = {item.img} alt = 'img-detail' />
+        <>
+            <div className='img-detalle-container'>
+                <img className = 'img-detailss' src = {item.img} alt = 'img-detail' />
+            </div>
             <div className = 'details'>
                 <h2 className = 'title-detail'> {item.name} </h2>
                 <p className = 'description-detail' > {item.description} </p>
-                <div className = 'price-detail'> Precio: $ {item.price} </div>
-                <div className = 'stock-detail'> Stock: {item.stock} unidades </div>
-                <div className = 'color-detail'> Color: {item.color} </div>
-                <div className = 'category-detail'> Categoria: {item.category} </div>
+                <div className = 'data-detail'> Precio: $ <span className='span-data'>{item.price}</span></div>
+                <div className = 'data-detail'> Stock: <span className='span-data'>{item.stock}</span></div>
+                <div className = 'data-detail'> Color: <span className='span-data'>{item.color}</span> </div>
+                <div className = 'data-detail'> Categoria: <span className='span-data'>{item.category}</span></div>
                 {quantity === 0 ? <ItemCount total = {item.stock} inicial = {quantity} onAdd = {agregar}/>  : <Link className = "pagar" to = {'/cart'} >Ir al carrito</Link> }
             </div>
-        </div>
+        </>
     );
 
 }
