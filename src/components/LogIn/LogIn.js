@@ -41,7 +41,7 @@ const LogIn = ()=>{
             <div className = "log-in-container">
                 <form className='form-login' onSubmit ={handleSubmit(onLogIn)}>
                     <div className = 'campo radius-t arriba'>
-                        <FaEnvelope/>
+                        <FaEnvelope className='input-icon' />
                         <input className='input-form radius-t' type = 'text'
                         autoComplete = 'on'
                         placeholder = 'Email'
@@ -59,7 +59,7 @@ const LogIn = ()=>{
                         />
                     </div>
                     <div className='campo radius-b'>
-                        <FaKey/>
+                        <FaKey className='input-icon' />
                         <input className='input-form radius-b' type = 'password'
                         autoComplete = 'off'
                         placeholder = 'Contraseña'

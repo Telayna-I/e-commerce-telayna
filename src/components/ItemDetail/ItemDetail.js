@@ -53,7 +53,7 @@ const ItemDetail = ({ item }) =>{
                 <div className = 'data-detail'> Stock: <span className='span-data'>{item.stock}</span></div>
                 <div className = 'data-detail'> Color: <span className='span-data'>{item.color}</span> </div>
                 <div className = 'data-detail'> Categoria: <span className='span-data'>{item.category}</span></div>
-                {quantity === 0 ? <ItemCount total = {item.stock} inicial = {quantity} onAdd = {agregar}/>  : <Link className = "pagar" to = {'/cart'} >Ir al carrito</Link> }
+                {quantity === 0 ? <ItemCount className = "conter" total = {item.stock} inicial = {quantity} onAdd = {agregar}/>  : <Link className = "pagar" to = {'/cart'} >Ir al carrito</Link> }
             </div>
         </>
     );

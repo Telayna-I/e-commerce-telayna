@@ -6,10 +6,15 @@
     👉 Problemas con imagenes, vídeos e iconos svg
     👉 Problemas con tipografías y etiquetas input en formularios
     👉 Unificar la tipografía de todas las etiquetas de una web
-
 */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 /* Aquí definimos las Custom properties */
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 :root{
 
   --color-primario   : #f0f0f0;
@@ -21,18 +26,7 @@
 }
   
 /* Las adaptamos al modo oscuro */
-@media (prefers-color-scheme: dark) {
-  :root{
-    --color-primario   : #181818;
-    --color-secundario : #f0f0f0;
-  }
-}
-@media (prefers-color-scheme: light) {
-  :root{
-    --color-primario   : #181818;
-    --color-secundario : #f0f0f0;  
-  }
-}
+
 
 /* Opcional */
 /* Configuramos si un usuario ha activado el modo alto contraste. (WD) */
@@ -58,11 +52,8 @@
 /* Cuidado con el uso del *. Normalmente se se debe de usar en selectores al maquetar. Pero usar alguno para resetear y evitarnos problemas no es mala opción. Tú eliges. */
 
 /* 
-
 Puedes elegir usar: *{}
-
 Puedes elegir usar esto: 
-
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -95,7 +86,7 @@ time, mark, audio, video , button, button {
   padding: 0;
   border: 0;
   box-sizing: border-box;
-  vertical-align: baseline;
+  /* vertical-align: baseline; */
 }
 
 /* Evitamos problemas con las imagenes */
@@ -127,7 +118,7 @@ html {
 }
 
 /* Desactivamos estilos por defecto de las principales etiquetas de texto */
-h1 , h2 , h3 , h4 , h5 , h6 , p ,span , a , strong , blockquote , i , b , u , em {
+h1 , h2 , h3 , h4 , h5 , h6 , p ,span , a , strong , blockquote  , b , u , em {
   font-size: 1em;
   font-weight: inherit;
   font-style: inherit;
@@ -142,8 +133,8 @@ blockquote:before, blockquote:after, q:before, q:after {
 
 /* Configuramos el texto que seleccionamos */
 ::selection {
-  background-color: var(--color-primario);
-  color: var(--color-secundario);
+  background-color: var(--color-secundario);
+  color: var(--color-primario);
 }
 
 /* Nivelamos problemas de tipografías y colocación de formularios */
@@ -166,8 +157,8 @@ table , tr , td {
 
 /* Evitamos problemas con los SVG */
 svg{
-    width: 100%;
-    display: block;
+    /* width: 100%; */
+    /* display: block; */
     fill: currentColor;
 }
 /* (Probándolo, no usar en producción) En el caso de añadir una  */
@@ -180,8 +171,8 @@ body {
   min-height  : 100vh;
   font-size   : 100%;
   font-family : var(--tipo-principal);
-  color       : var(--color-primario);
-  background-color: var(--color-secundario);
+  color       : var(--color-secundario);
+  background-color: var(--color-primario);
   padding-top: 7.5rem;
   /* opcional */ line-height: 1.4em;
   /* opcional */ hyphens: auto;

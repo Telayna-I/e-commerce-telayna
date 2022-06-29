@@ -1,7 +1,6 @@
 .item-detail-container{
     display: flex;
-    height: 30rem;
-    width: 60rem;
+    width: 90%;
     background-color: #f0f0f0;
     margin: auto;
     margin-top: 4rem;
@@ -11,4 +10,11 @@
 .swal2-toast-shown{
     position: relative;
     display: flex;
+}
+
+@media only screen and (max-width: 800px){
+    .item-detail-container{
+        flex-direction: column;
+        width: 70%;
+    }
 }

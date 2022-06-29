@@ -2,7 +2,7 @@
     text-align: center;
     font-size: 2rem;
     font-weight: 600;
-    margin-top: 1rem;
+    margin-top: 3rem;
 }
 .swal2-toast-shown{
     position: relative;
@@ -13,6 +13,7 @@
     display: flex;
     align-content: center;
     justify-content: center;
+    flex-wrap: wrap;
     margin: 2rem;
 }
 
@@ -24,7 +25,8 @@
     border-radius: 5px;
     cursor: pointer;
     margin: 0 0.4rem;
-    background: rgba( 255, 255, 255, 0.7 );
+    margin-bottom: 1rem;
+    background: yellowgreen;
 }
 
 .boton-carrito:hover{
@@ -34,7 +36,7 @@
     display: flex;
     flex-direction: column;
     margin: auto;
-    width: 60%;
+    width: 85%;
     background: rgba( 255, 255, 255, 0.7 );
     box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
     backdrop-filter: blur( 3px );
@@ -124,4 +126,11 @@
 
 .swal2-toast-shown{
     display: flex;
+}
+
+
+@media only screen and (max-width: 800px){
+    .cart-container{
+        width: 90%;
+    }
 }

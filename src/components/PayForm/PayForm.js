@@ -22,7 +22,7 @@ const PayForm = () => {
             <div className = "shipping-form-container">
                 <form className='shipping-form' onSubmit ={handleSubmit(onSubmit)}>
                     {!credential.length > 0 && <div className = 'campo radius-t arriba'>
-                        <FaEnvelope/>
+                        <FaEnvelope className='input-icon'/>
                         <input className='input-form radius-t' type = 'text'
                         autoComplete = 'off'
                         placeholder = 'Nombre'
@@ -40,7 +40,7 @@ const PayForm = () => {
                         />
                     </div>}
                     <div className = 'campo radius-t arriba'>
-                        <FaPhoneAlt/>
+                        <FaPhoneAlt className='input-icon' />
                         <input className='input-form radius-t' type = 'text'
                         autoComplete = 'off'
                         placeholder = 'Telefono'
@@ -62,7 +62,7 @@ const PayForm = () => {
                         />
                     </div>
                     <div className = 'campo radius-b abajo'>
-                        <FaAddressCard/>
+                        <FaAddressCard className='input-icon' />
                         <input className='input-form radius-t' type = 'text'
                         autoComplete = 'off'
                         placeholder = 'Direccion'
@@ -80,7 +80,7 @@ const PayForm = () => {
                         />
                     </div>
                     
-                <button type="submit" value="submit" className = 'button-submit' > Confirmar</button>
+                <button type="submit" value="submit" className = 'button-submit bstmb' > Confirmar</button>
                 </form>
             </div>
             <div className='messages'>

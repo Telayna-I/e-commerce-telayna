@@ -2,6 +2,7 @@ body{
     background-color: #FFF1D7;
     background-image: url("https://res.cloudinary.com/telayna-i/image/upload/v1647523570/E-commerce-Coderhouse/fondo-login_jyoe98.jpg");
     background-repeat: no-repeat;
+    background-attachment: fixed;
     background-size: contain ;
     background-position: top  ;
 }
@@ -11,7 +12,7 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 28rem;
+    width: 40%;
     margin: auto;
     background: rgba( 255, 255, 255, 0.5 );
     box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
@@ -26,24 +27,33 @@ body{
     font-weight: bold;
     color: black;
     margin: 2rem;
+    line-height: 2rem;
 }
+
 .log-in-container{
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
 }
+
 .form-login{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 65%; 
     margin-bottom: 1rem;
 }
+
 .input-form{
-    padding: 0.3rem;
     outline: 0px;
-    background-color: white;
-    padding-left: 0.7rem ;
+    width: 100%;
+}
+
+.input-icon{
+    font-size: 1.2rem;
+    margin: 0.5rem;
 }
 .arriba{
     border-bottom: 1px solid grey;
@@ -60,8 +70,7 @@ body{
     align-items: center;
     color: #3A074C;
     background-color: white;
-    padding:0 0.5rem;
-    margin-right: 1rem;
+    width: 100%;
 }
 
 .error-message{
@@ -86,6 +95,7 @@ body{
 
 
 .button-submit {
+    margin: auto;   
     margin-top: 2rem;
     --color: #560bad;
     font-family: inherit;
@@ -131,6 +141,10 @@ body{
 .button-submit:active:before {
     background: #3a0ca3;
     transition: background 0s;
+}
+
+.bstmb{
+    margin-bottom: 2rem;
 }
 
 .hr{
@@ -186,4 +200,31 @@ body{
     cursor: pointer;
     font-size: 0.9rem;
     margin-bottom: 1rem;
+}
+
+@media only screen and (max-width: 770px){
+    .main{
+        width: 60%;
+    }
+}
+
+@media only screen and (max-width: 540px){
+    .main{
+        width: 60%;
+    }
+}
+@media only screen and (max-width: 470px){
+    .main{
+        width: 60%;
+    }
+}
+@media only screen and (max-width: 400px){
+    .main{
+        width: 80%;
+    }
+}
+@media only screen and (max-width: 340px){
+    .main{
+        width: 0%;
+    }
 }

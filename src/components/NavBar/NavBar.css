@@ -1,4 +1,4 @@
-.topheader {
+/* .topheader {
     display: flex;
     flex-direction: row;
 
@@ -94,4 +94,132 @@
 .log-out:hover{
     background-color: #00AAB2;
     color: white
+} */
+
+
+header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 70px;
+    text-align: center;
+    padding: 0 2rem;
+    color: var(--color-secundario);
+    background-color: #FFBD11;
+    /* box-shadow: 1 1px 10px #122; */
+    z-index: 1000;
+}
+
+.logo{
+    font-weight: 500;
+}
+
+nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav .nav-link{
+    margin: 0 1rem;
+    padding: 0.5rem 0.5rem;
+    border-radius: 5px;
+    font-size: .875rem;
+    text-decoration: none;
+    color: var(--color-secundario);
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: capitalize;
+}
+
+.nav-link:hover{
+    /* color:#626262 ; */
+    color:black ;
+}
+
+header .nav-btn{
+    padding: 5px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    color: var(--color-secundario);
+    visibility: hidden;
+    opacity: 0;
+    font-size: 1.8rem;
+    display: none;
+}
+
+.log-out{
+    font-weight: bold;
+    font-size: .875rem;
+    cursor: pointer;
+    margin-left: 5rem;
+    padding: 0.5rem;
+    border-radius: 20px;
+
+    transition: 0.2s ;
+}
+
+.log-out:hover{
+    background-color: #00AAB2;
+    color: white
+}
+
+@media only screen and (max-width: 768px){
+    header .nav-btn{
+        visibility: visible;
+        opacity: 1;
+        display: initial;
+    }
+    
+    nav .nav-link{
+        width: 100%;
+        margin: 0rem 0rem;
+        padding: 2rem 0;
+    }
+
+    .nav-link:hover{
+        background-color: #e2e2e2;
+    }
+    
+    header nav{
+        position: fixed;
+        top:0 ;
+        left: 0;
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        background-color: #f0f0f0;
+        gap: 1.5rem;
+        z-index: 100000;
+        transition: 1s;
+        transform: translateY(-100vh);
+    }
+
+    header .responsive_nav{
+        transform: none;
+    }
+
+    nav .nav-close-btn{
+        font-size: 2.3rem;
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+    }
+
+
+    .log-out{
+        margin-left: 0px;
+    }
+
+    .log-out:hover{
+        color: black;
+    }
 }

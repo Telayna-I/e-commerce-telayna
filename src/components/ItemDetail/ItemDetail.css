@@ -1,23 +1,25 @@
 .img-detalle-container{
     display: flex;
-    width: 90rem;
+    width: 140%;
     background-color: white;
 }
 
 .img-detailss{
-    height: 300px;
+    height: 18.75rem;
     margin: auto;
     object-fit: scale-down;
 }
 
 .details{
+    display: flex;
+    flex-direction: column;
     width: auto;
 }
 .title-detail{
     text-align: center;
     margin-top: 3rem;
     font-size: 2rem;
-    font-weight: bold;
+    font-weight: bold; 
 }
 
 .description-detail{
@@ -30,9 +32,7 @@
 }
 
 .item-count{
-    position: relative;
-    top: -120px;
-    left: 100px;
+    margin-bottom: 2rem;
 }
 
 .span-data{
@@ -57,4 +57,16 @@
     background-color: #E74C3C;
     border:2px solid black;
     color: white;
+}
+
+@media only screen and (max-width: 800px){
+    .img-detalle-container{
+        width: auto;
+    }
+
+    .img-detailss{
+        height:12rem;
+    }
+
+    
 }

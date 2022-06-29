@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 50%;
+    width: 55%;
     margin: auto;
     margin-top: 4rem;
     margin-bottom: 4rem;
@@ -18,9 +18,27 @@
 .h2-pay-form{
     font-size: 2rem;
     font-weight: bold;
-    margin: 1rem;
+    margin: 2.5rem;
+    line-height: 2.5rem;
 }
 
-.button-submit{
-    margin-bottom: 2rem;
+@media only screen and (max-width: 680px){
+    .pay-form{
+        width: 70%;
+    }
+}
+@media only screen and (max-width: 500px){
+    .pay-form{
+        width: 80%;
+    }
+}
+@media only screen and (max-width: 370px){
+    .pay-form{
+        width: 90%;
+    }
+}
+@media only screen and (max-width: 330px){
+    .pay-form{
+        width: 100%;
+    }
 }
