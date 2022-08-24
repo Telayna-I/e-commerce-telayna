@@ -1,31 +1,34 @@
 import './Cart.css'
-import { useContext, useEffect, useState } from 'react'
-import { CartContext } from '../../Context/CartContext'
+import { useEffect, useState } from 'react'
 import ItemCart from '../ItemCart/ItemCart'
 import { NavLink } from 'react-router-dom'
 import { addDoc, collection, writeBatch, getDoc, doc, Timestamp  } from 'firebase/firestore'
 import { db } from '../../services/firebase/firebase'
 import Spinner from '../Spinner/Spinner';
 import PayForm from '../PayForm/PayForm'
-import { useAuth } from '../../Context/AuthContext'
 import Swal from 'sweetalert2';
+import { useSelector, useDispatch } from 'react-redux'
+import { setContact } from '../../app/reducers/AuthSlice/authSlice'
+import { clearCart, removeItem, precioTotal, contarItems } from '../../app/reducers/CartSlice/cartSlice'
 
 
 
 const Cart = () => {
     const [confirmarCompra, setConfirmarCompra] = useState(true)
-    
 
-    const { cart, clearCart, precioTotal, removeItem } = useContext(CartContext)
 
     const [processingOrder, setProcessingOrder] = useState(false)
     
     const [idCompra, setIdCompra] = useState()
 
-    const { contact, setContact} = useAuth()
+
+    const { contact } = useSelector(state => state.auth)
+    const { carrito } = useSelector(state => state.cart)
+
+    const dispatch = useDispatch()
 
     const vaciarCarro = () =>{
-        clearCart()
+        dispatch(clearCart())
     }
 
     const confirmPurchase = () => {
@@ -34,13 +37,13 @@ const Cart = () => {
     useEffect(()=>{
         contact.address && setProcessingOrder(true);
         contact.address && confirmOrder()
-        contact.address && setContact({
+        contact.address && dispatch(setContact({
             address: '',
             name: '',
             phone: '',
-        })
-
-    },[contact])
+        }))
+        carrito.map((item)=> item.cantidad === 0 && dispatch(removeItem(item.id,carrito)))
+    },[contact,dispatch,carrito])
 
 
     const alerta = ((prod)=>{
@@ -61,8 +64,8 @@ const Cart = () => {
     const confirmOrder = () =>{
         const objOrder = {
             buyer: contact,
-            items: cart,
-            total: precioTotal(),
+            items: carrito,
+            total: precioTotal(carrito),
             date: Timestamp.fromDate(new Date())
         }
         
@@ -73,7 +76,7 @@ const Cart = () => {
             if(outOfStock.length === 0){
                 addDoc(collection(db,'orders'), objOrder).then(({id}) =>{
                     batch.commit().then(()=>{
-                        clearCart()
+                        dispatch(clearCart())
                         setProcessingOrder(false)
                         setIdCompra(id)
                     })
@@ -82,8 +85,8 @@ const Cart = () => {
                 outOfStock.forEach(product =>{
                     setProcessingOrder(false)
                     alerta(product)
-                    removeItem(product.id)
-                    window.sessionStorage.setItem("carrito", JSON.stringify(cart))
+                    dispatch(removeItem(product.id,carrito))
+                    window.localStorage.setItem("carrito", JSON.stringify(carrito))
                 })
             }
         }
@@ -120,17 +123,17 @@ const Cart = () => {
             </div>
         )
 
-    }else if(cart.length > 0){
+    }else if(carrito.length > 0){
         return(
             <div className = 'cart-container'>
                 <h2 className='title'>Carrito</h2>
                 <div className='cartt'>
-                    {cart.map((product)=>(
+                    {carrito.map((product)=>(
                         <ItemCart className = "item-cart" product = {product} key = {product.id}  />
                     ))}
                 </div>
 
-                <h4 className='precio-total' >El precio total es de: ${precioTotal()}</h4>
+                <h4 className='precio-total' >El precio total es de: ${precioTotal(carrito)}</h4>
                 <div className='buttons'>
                     <button className='boton-carrito' onClick ={vaciarCarro}>Vaciar carrito</button>
                     {confirmarCompra && <button className='boton-carrito' onClick ={confirmPurchase}>Confirmar compra</button>}

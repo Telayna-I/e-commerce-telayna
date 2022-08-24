@@ -1,16 +1,15 @@
 import './ItemDetail.css'
 import ItemCount from '../ItemCount/ItemCount';
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom'
-import { CartContext } from '../../Context/CartContext';
+import { addItemToCart } from '../../app/reducers/CartSlice/cartSlice';
 import Swal from 'sweetalert2';
-
+import { useSelector, useDispatch } from 'react-redux';
 
 const ItemDetail = ({ item }) =>{
     
     const [quantity,setQuantity] = useState(0)
-
-    const {addToCart} = useContext(CartContext)
+    const dispatch = useDispatch()
     
     const alerta = ()=>{
         const Toast = Swal.mixin({
@@ -25,12 +24,13 @@ const ItemDetail = ({ item }) =>{
             title: `Se agrego el item al carrito `,
         })
     }
-
-
+    
+    const { carrito } = useSelector(state => state.cart)
+    
     const agregar = (cantidad) =>{
         if(cantidad > 0){
             setQuantity(cantidad);
-            addToCart(item,cantidad);
+            dispatch(addItemToCart(item,cantidad,carrito));
             alerta()
         }
         

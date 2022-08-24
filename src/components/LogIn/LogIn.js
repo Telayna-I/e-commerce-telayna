@@ -3,30 +3,34 @@ import { useForm } from 'react-hook-form'
 import { FaEnvelope, FaKey } from "react-icons/fa";
 import { MdDangerous } from "react-icons/md";
 import { FcGoogle } from "react-icons/fc";
-import { useAuth } from '../../Context/AuthContext';
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from 'react';
+import { useSelector } from 'react-redux/es/hooks/useSelector';
+import { useDispatch } from 'react-redux';
+import { iniciarSesion, iniciarSesionGoogle } from '../../app/reducers/AuthSlice/authSlice';
 
 const LogIn = ()=>{
     const {register, formState :{errors} , handleSubmit} = useForm();
 
-    const { iniciarSesion,loged, error, iniciarSesionGoogle } = useAuth();
+    // const { iniciarSesion,loged, error, iniciarSesionGoogle } = useAuth();
+
+    const { loged, error } = useSelector(state => state.auth)
 
     const navigate = useNavigate()
-
-    const onLogIn = async (data) =>{
+    const dispatch = useDispatch()
+    const onLogIn = (data) =>{
         try{
-            await iniciarSesion(data.email, data.password)
+            dispatch(iniciarSesion(data.email, data.password))
         }catch(err){
             console.log(err.message)
         }
     }
 
-    const handleGoogleSignIn = async ()=>{
+    const handleGoogleSignIn = ()=>{
         try{
-            await iniciarSesionGoogle()
+            dispatch( iniciarSesionGoogle())
         }catch(err){
-            console.log(err.code)
+            console.log(err)
         }
     }
 

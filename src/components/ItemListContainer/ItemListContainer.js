@@ -37,7 +37,7 @@ const ItemListContainer = (props) =>{
         return(
             <div className='item-list-container'>
                 <h2 className = {className}>Work-Shop</h2>
-                <Spinner/>
+                <Spinner className = 'spinner'/>
             </div>
         )
     }

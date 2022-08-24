@@ -1,22 +1,25 @@
 import './NavBar.css'
 import CartWidget from '../CartWidget/CartWidget.js'
 import { NavLink } from 'react-router-dom';
-import { useContext } from 'react';
-import { CartContext } from '../../Context/CartContext'
-import { useAuth } from '../../Context/AuthContext';
 import { useState, useEffect, useRef } from 'react';
 import { getDocs, collection } from 'firebase/firestore';
 import { db } from '../../services/firebase/firebase';
 import { FaBars } from "react-icons/fa";
 import { MdOutlineClose } from "react-icons/md";
+import { useSelector, useDispatch } from 'react-redux';
+import { logOut } from '../../app/reducers/AuthSlice/authSlice';
+import { contarItems } from '../../app/reducers/CartSlice/cartSlice';
 
 
 const NavBar = () =>{
 
-    const { cart, contarItems } = useContext(CartContext)
     const [categories, setCategories] = useState([]);
 
-    const { loged, logOut, setLoged } = useAuth();
+
+    const { loged } = useSelector(state => state.auth)
+    const { carrito, length } = useSelector(state => state.cart)
+
+    const dispatch = useDispatch()
 
 
     const navRef = useRef();
@@ -25,14 +28,10 @@ const NavBar = () =>{
         navRef.current.classList.toggle('responsive_nav')
     }
 
-    const signOut = async ()=>{
-        try{
-            await logOut()
-            setLoged(false)
-        }catch(err){
-            console.log(err.code)
-        }
+    const signOut = ()=>{
+        dispatch(logOut())
     }
+
 
     useEffect(() => {
         getDocs(collection(db, 'categories')).then(response => {
@@ -41,7 +40,8 @@ const NavBar = () =>{
             })
             setCategories(categories)
         })
-    }, [])
+        dispatch(contarItems(carrito))
+    }, [carrito])
     
     return(
         <header>
@@ -57,9 +57,9 @@ const NavBar = () =>{
                 
                 {loged && categories.map(cat => <NavLink key={cat.id} className = {"nav-link"} onClick={showNavBar} to={`/category/${cat.id}`}> {cat.description}</NavLink>)}
 
-                {cart.length > 0 && loged && (<NavLink to = {`/cart`} className = {"after"}><CartWidget size ="1.3rem"/> </NavLink>) }
+                {carrito.length > 0 && loged && (<NavLink to = {`/cart`} className = {"after"}><CartWidget size ="1.3rem"/> </NavLink>) }
                 
-                {cart.length > 0 && loged && (<p className='cart-number'>{contarItems()}</p>)}
+                {carrito.length > 0 && loged && (<button className='cart-number'>{length}</button>)}
 
                 {loged && <div className={"log-out nav-link"} onClick={signOut}  >Logout</div>}
                     

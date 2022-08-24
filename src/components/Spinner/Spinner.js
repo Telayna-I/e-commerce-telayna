@@ -1,5 +1,6 @@
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import { Bars } from  'react-loader-spinner';
+import './Spinner.css'
 
 
 const Spinner = () =>{

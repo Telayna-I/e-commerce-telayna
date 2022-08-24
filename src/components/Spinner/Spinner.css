@@ -1,3 +1,11 @@
-.spinner-processing{
+.spinner{
     margin-bottom: 2rem;
+    background-color: white !important;
+    color: azure !important;
+    margin: auto !important;
+    text-align: center !important;
+}
+
+.spinner{
+    margin: auto ;
 }

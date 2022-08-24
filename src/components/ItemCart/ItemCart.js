@@ -1,17 +1,19 @@
 import './ItemCart.css'
-import { useContext } from 'react';
-import { CartContext } from '../../Context/CartContext';
+import { useSelector, useDispatch } from 'react-redux/es/exports'
+import { restar, removeItem } from '../../app/reducers/CartSlice/cartSlice'
 
 
 
 const ItemCart = ({product}) =>{
-    const { restar, removeItem } = useContext(CartContext)
+
+    const { carrito } = useSelector(state => state.cart)
+    const dispatch = useDispatch()
 
     const handleItem = ()=>{
         if(product.cantidad < 1){
-            removeItem(product.id)
+            dispatch(removeItem(product.id,carrito))
         }else{
-            restar(product.id)    
+            dispatch(restar(product.id,carrito))
         }
     }
 

@@ -2,17 +2,20 @@ import './PayForm.css'
 import { useForm } from 'react-hook-form'
 import { FaEnvelope, FaPhoneAlt, FaAddressCard } from "react-icons/fa";
 import { MdDangerous } from "react-icons/md";
-import { useAuth } from '../../Context/AuthContext';
+// import { useAuth } from '../../Context/AuthContext';
+import { useSelector, useDispatch } from 'react-redux';
+import { infoContact } from '../../app/reducers/AuthSlice/authSlice';
 
 
 const PayForm = () => {
 
     const {register, formState :{errors} , handleSubmit} = useForm();
 
-    const { credential, infoContact } = useAuth()
+    const { credential } = useSelector(state => state.auth)
+    const dispatch = useDispatch()
 
     const onSubmit = (data) => {
-        infoContact(data)
+        dispatch(infoContact(data))
     }
     
 

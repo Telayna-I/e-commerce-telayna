@@ -63,6 +63,7 @@ export const logIn = (email,password) => {
     })
 }
 
+
 export const logInWithGoogle = () => {
     return new Promise((resolve,reject)=>{
         const googleProvider = new GoogleAuthProvider();

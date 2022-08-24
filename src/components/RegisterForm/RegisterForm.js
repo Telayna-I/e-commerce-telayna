@@ -1,23 +1,25 @@
 import '../LogIn/LogIn.css'
-import { useAuth } from '../../Context/AuthContext'
 import { useForm } from 'react-hook-form'
 import { FaEnvelope, FaKey } from "react-icons/fa";
 import { MdDangerous } from "react-icons/md";
 import { useNavigate, Link } from "react-router-dom";
 import { useEffect } from 'react';
+import { registrarse } from '../../app/reducers/AuthSlice/authSlice';
+import { useSelector, useDispatch } from 'react-redux';
 
 const RegisterForm = () =>{
 
     const {register, formState :{errors} , handleSubmit} = useForm();
     
 
-    const { registrarse, loged, error } = useAuth();
+    const { loged, error } = useSelector(state => state.auth)
 
+    const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    const onRegister = async (data)=>{
+    const onRegister = (data)=>{
         try{
-            await registrarse(data.email, data.password)
+            dispatch(registrarse(data.email, data.password))
         }catch(err){
             console.log(err.code)
         }

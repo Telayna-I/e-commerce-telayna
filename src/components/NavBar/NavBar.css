@@ -114,6 +114,20 @@ header{
     z-index: 1000;
 }
 
+.cart-number{
+    position: relative;
+    top: -7px;
+    left: -8px;
+    width: 15px;
+    height: 15px;
+    font-size: .675rem !important;
+    background-color: #4285F4;
+    color: white !important;
+    text-align: center;
+    margin: auto;
+    border-radius: 50%;
+}
+
 .logo{
     font-weight: 500;
 }
